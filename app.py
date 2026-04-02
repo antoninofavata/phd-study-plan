@@ -124,3 +124,25 @@ if st.button("Submit Study Plan"):
         st.write("**Courses:**")
         for course in selected_courses:
             st.write(f"- {course}")
+
+import streamlit as st
+import gspread
+from google.oauth2.service_account import Credentials
+
+def connect():
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"]
+    )
+    client = gspread.authorize(creds)
+    return client
+
+st.title("Test Google Sheets")
+
+if st.button("Scrivi test su Sheets"):
+    client = connect()
+    
+    sheet = client.open("NOME_DEL_TUO_FILE").sheet1
+    
+    sheet.append_row(["Test", "Funziona", "OK"])
+    
+    st.success("Riga scritta con successo!")
