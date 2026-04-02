@@ -1,1 +1,116 @@
+courses:
 
+# ======================
+# FASE A
+# ======================
+
+- id: A1
+  name: Scientific Computing and Python Programming
+  phase: A
+  years: [2025]
+
+- id: A2
+  name: Probability Theory and Statistics
+  phase: A
+  years: [2025]
+
+- id: A3
+  name: Time Series Analysis and Data-driven Modeling
+  phase: A
+  years: [2025]
+
+- id: A4
+  name: Experimental Methods: Laboratory and In-situ Testing
+  phase: A
+  years: [2026]
+
+- id: A5
+  name: Numerical Analysis for Engineering Models
+  phase: A
+  years: [2026]
+
+- id: A6
+  name: Functional Analysis and Variational Methods for Engineering Applications
+  phase: A
+  years: [2026]
+
+
+# ======================
+# FASE B - Mechanics of Solids and Structures
+# ======================
+
+- id: B1
+  name: Variational methods for solid mechanics: elasticity, plasticity and damage
+  phase: B
+  sector: Mechanics of Solids and Structures
+  years: [2025]
+
+- id: B2
+  name: Linear and nonlinear structural dynamics
+  phase: B
+  sector: Mechanics of Solids and Structures
+  years: [2025]
+
+- id: B3
+  name: Continuum Mechanics and Thermodynamics
+  phase: B
+  sector: Mechanics of Solids and Structures
+  years: [2026]
+
+- id: B4
+  name: Advanced Finite Element Methods
+  phase: B
+  sector: Mechanics of Solids and Structures
+  years: [2026]
+
+
+# ======================
+# Structural Engineering
+# ======================
+
+- id: B5
+  name: Integrated seismic and energy rehabilitation of reinforced concrete buildings
+  phase: B
+  sector: Structural Engineering
+  years: [2025]
+
+- id: B6
+  name: Seismic Safety and Sustainability: Next Generation of Low-Damage Concrete and Timber Buildings
+  phase: B
+  sector: Structural Engineering
+  years: [2026]
+
+- id: B7
+  name: Masonry structures: from analytical to experimental approaches
+  phase: B
+  sector: Structural Engineering
+  years: [2026]
+
+
+# ======================
+# Geotechnical Engineering
+# ======================
+
+- id: B8
+  name: Constitutive Modelling of Geomaterials
+  phase: B
+  sector: Geotechnical Engineering
+  years: [2025]
+
+- id: B9
+  name: Numerical Modelling in Geomechanics
+  phase: B
+  sector: Geotechnical Engineering
+  years: [2025]
+
+- id: B10
+  name: Soil Structure Interaction
+  phase: B
+  sector: Geotechnical Engineering
+  years: [2026]
+
+- id: B11
+  name: Special Topics in Geotechnical Engineering
+  phase: B
+  sector: Geotechnical Engineering
+  years: [2026]
