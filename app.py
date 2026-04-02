@@ -2,140 +2,125 @@ import streamlit as st
 import yaml
 
 # ======================
-# CARICAMENTO DATI
+# LOAD DATA
 # ======================
 
 with open("courses.yaml", "r") as f:
     courses = yaml.safe_load(f)["courses"]
 
 # ======================
-# TITOLO
+# TITLE
 # ======================
 
 st.title("PhD Study Plan")
 
 # ======================
-# INFORMAZIONI INIZIALI
+# COURSE CATALOGUE
 # ======================
 
-st.header("Informazioni sui corsi")
+st.header("Course Catalogue")
 
-st.markdown("""
-### Fase A
-- Scientific Computing and Python Programming  
-- Probability Theory and Statistics  
-- Time Series Analysis and Data-driven Modeling  
-- Experimental Methods: Laboratory and In-situ Testing  
-- Numerical Analysis for Engineering Models  
-- Functional Analysis and Variational Methods for Engineering Applications  
+# -----------------------
+# FASE A
+# -----------------------
 
-### Fase B
-
-#### Mechanics of Solids and Structures
-- Variational methods for solid mechanics  
-- Linear and nonlinear structural dynamics  
-- Continuum Mechanics and Thermodynamics  
-- Advanced Finite Element Methods  
-
-#### Structural Engineering
-- Integrated seismic and energy rehabilitation of reinforced concrete buildings  
-- Seismic Safety and Sustainability  
-- Masonry structures  
-
-#### Geotechnical Engineering
-- Constitutive Modelling of Geomaterials  
-- Numerical Modelling in Geomechanics  
-- Soil Structure Interaction  
-- Special Topics in Geotechnical Engineering  
-""")
-
-st.divider()
-
-# ======================
-# DATI UTENTE
-# ======================
-
-st.subheader("Dati studente")
-
-name = st.text_input("Nome e Cognome")
-email = st.text_input("Email")
-
-st.divider()
-
-# ======================
-# SELEZIONE CORSI
-# ======================
-
-st.header("Selezione corsi")
-
-selected_courses = []
-
-# --- FASE A ---
-st.subheader("Fase A")
+st.subheader("Phase A")
 
 for c in courses:
     if c["phase"] == "A":
         years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-        label = f"{c['name']} ({years_str})"
         
-        if st.checkbox(label):
-            selected_courses.append(c["name"])
+        with st.expander(f"{c['name']} ({years_str})"):
+            st.write("Methodological course")
+            st.write(f"Available in: {years_str}")
 
-st.divider()
+# -----------------------
+# FASE B
+# -----------------------
 
-# --- FASE B ---
-st.subheader("Fase B")
+st.subheader("Phase B")
 
-sectors = [
-    "Mechanics of Solids and Structures",
-    "Structural Engineering",
-    "Geotechnical Engineering"
-]
+sectors = sorted(set(c.get("sector", "") for c in courses if c["phase"] == "B"))
 
-for sector in sectors:
-    st.markdown(f"### {sector}")
+for s in sectors:
+    st.markdown(f"### {s}")
     
     for c in courses:
-        if c["phase"] == "B" and c["sector"] == sector:
+        if c["phase"] == "B" and c.get("sector") == s:
             years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-            label = f"{c['name']} ({years_str})"
             
-            if st.checkbox(label):
-                selected_courses.append(c["name"])
-
-    st.divider()
+            with st.expander(f"{c['name']} ({years_str})"):
+                st.write(f"Sector: {s}")
+                st.write(f"Available in: {years_str}")
+                st.write("Detailed description coming soon...")
 
 # ======================
-# RIEPILOGO
+# RULES
 # ======================
 
-st.header("Riepilogo")
+st.header("Rules")
+
+st.markdown("""
+- At least **3 courses from Phase A**  
+- At least **3 courses from Phase B**  
+- At least **4 courses in Year 1**  
+""")
+
+# ======================
+# STUDENT INFO
+# ======================
+
+st.header("Create your Study Plan")
+
+name = st.text_input("Name")
+cycle = st.text_input("Cycle")
+
+# ======================
+# SELECTION
+# ======================
+
+st.header("Select your courses")
+
+selected_courses = []
+
+for c in courses:
+    years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
+    label = f"{c['name']} ({years_str})"
+    
+    if st.checkbox(label):
+        selected_courses.append(c["name"])
+
+# ======================
+# SUMMARY
+# ======================
+
+st.header("Summary")
 
 if selected_courses:
     for course in selected_courses:
         st.write(f"- {course}")
 else:
-    st.write("Nessun corso selezionato")
+    st.write("No courses selected")
 
 # ======================
-# INVIO
+# SUBMIT
 # ======================
 
-if st.button("Invia piano di studio"):
+if st.button("Submit Study Plan"):
 
-    if not name or not email:
-        st.error("Inserisci nome ed email.")
+    if not name or not cycle:
+        st.error("Please fill in all required fields.")
     
     elif not selected_courses:
-        st.error("Seleziona almeno un corso.")
+        st.error("Please select at least one course.")
     
     else:
-        st.success("Piano inviato correttamente!")
+        st.success("Study plan submitted successfully!")
 
-        st.write("## Dati inviati")
-        st.write(f"**Nome:** {name}")
-        st.write(f"**Email:** {email}")
-        
-        st.write("**Corsi selezionati:**")
+        st.write("## Submitted Data")
+        st.write(f"**Name:** {name}")
+        st.write(f"**Cycle:** {cycle}")
+
+        st.write("**Courses:**")
         for course in selected_courses:
             st.write(f"- {course}")
