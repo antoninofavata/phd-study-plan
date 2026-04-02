@@ -140,10 +140,9 @@ st.title("Test Google Sheets")
 
 if st.button("Scrivi test su Sheets"):
     client = connect()
-    
-    sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM")
-st.write("Connessione OK")
-    
+
+    sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
+
     sheet.append_row(["Test", "Funziona", "OK"])
     
     st.success("Riga scritta con successo!")
