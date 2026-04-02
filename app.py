@@ -141,7 +141,7 @@ st.title("Test Google Sheets")
 if st.button("Scrivi test su Sheets"):
     client = connect()
     
-    sheet = client.open("NOME_DEL_TUO_FILE").sheet1
+    sheet = client.open("PhD Study Plans").sheet1
     
     sheet.append_row(["Test", "Funziona", "OK"])
     
