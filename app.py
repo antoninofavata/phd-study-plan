@@ -130,9 +130,14 @@ import gspread
 from google.oauth2.service_account import Credentials
 
 def connect():
+    import json
+    from google.oauth2.service_account import Credentials
+    import gspread
+
     creds = Credentials.from_service_account_info(
-        st.secrets["GOOGLE_SERVICE_ACCOUNT"]
+        json.loads(st.secrets["GOOGLE_SERVICE_ACCOUNT"])
     )
+    
     client = gspread.authorize(creds)
     return client
 
