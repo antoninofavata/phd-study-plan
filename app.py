@@ -1,129 +1,68 @@
 import streamlit as st
 import yaml
-import pandas as pd
-from datetime import datetime
 
-# -----------------------
-# LOAD DATA
-# -----------------------
-with open("courses.yaml") as f:
+# ======================
+# CARICAMENTO DATI
+# ======================
+
+with open("courses.yaml", "r") as f:
     courses = yaml.safe_load(f)["courses"]
 
-# -----------------------
-# TITLE
-# -----------------------
+# ======================
+# INTERFACCIA
+# ======================
+
 st.title("PhD Study Plan")
-st.subheader("Structural and Geotechnical Engineering")
 
-# -----------------------
-# YEAR SELECTION
-# -----------------------
-year_label = st.selectbox(
-    "Academic Year",
-    ["2025/26", "2026/27"]
-)
+st.subheader("Seleziona i corsi")
 
-year = 2025 if year_label == "2025/26" else 2026
+name = st.text_input("Nome e Cognome")
+email = st.text_input("Email")
 
-active = [c for c in courses if year in c["years"]]
+# ======================
+# SELEZIONE CORSI
+# ======================
 
-# -----------------------
-# SHOW COURSES
-# -----------------------
-st.header("Course Catalogue")
+selected_courses = []
 
-# Fase A
-st.subheader("Phase A")
-for c in active:
-    if c["phase"] == "A":
-        with st.expander(c["name"]):
-            st.write("Methodological course")
+for c in courses:
+    years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
+    
+    label = f"{c['name']} ({years_str})"
+    
+    if st.checkbox(label):
+        selected_courses.append(c["name"])
 
-# Fase B per settore
-st.subheader("Phase B")
+# ======================
+# OUTPUT
+# ======================
 
-sectors = sorted(set(c.get("sector","") for c in active if c["phase"]=="B"))
+st.write("### Corsi selezionati:")
 
-for s in sectors:
-    st.markdown(f"**{s}**")
-    for c in active:
-        if c["phase"]=="B" and c.get("sector")==s:
-            with st.expander(c["name"]):
-                st.write(f"Sector: {s}")
+if selected_courses:
+    for course in selected_courses:
+        st.write(f"- {course}")
+else:
+    st.write("Nessun corso selezionato")
 
-# -----------------------
-# RULES
-# -----------------------
-st.header("Rules")
-st.markdown("""
-- At least **3 courses from Phase A**  
-- At least **3 courses from Phase B**  
-- At least **4 courses in Year 1**  
-""")
+# ======================
+# INVIO
+# ======================
 
-# -----------------------
-# STUDENT INFO
-# -----------------------
-st.header("Create your Study Plan")
-
-name = st.text_input("Name")
-cycle = st.text_input("Cycle")
-
-# -----------------------
-# SELECTION
-# -----------------------
-selected = []
-
-st.subheader("Select Courses")
-
-for c in active:
-    col1, col2 = st.columns([3,1])
-
-    with col1:
-        check = st.checkbox(f"{c['name']} ({c['phase']})", key=c["id"])
-
-    with col2:
-        year_choice = st.selectbox(
-            "Year",
-            ["", "1", "2"],
-            key=f"{c['id']}_year"
-        )
-
-    if check and year_choice:
-        selected.append({
-            "course": c["name"],
-            "phase": c["phase"],
-            "year": int(year_choice)
-        })
-
-# -----------------------
-# VALIDATION + SAVE
-# -----------------------
-if st.button("Submit Plan"):
-
-    A = [c for c in selected if c["phase"]=="A"]
-    B = [c for c in selected if c["phase"]=="B"]
-    Y1 = [c for c in selected if c["year"]==1]
-
-    if len(A) < 3:
-        st.error("You must select at least 3 Phase A courses")
-    elif len(B) < 3:
-        st.error("You must select at least 3 Phase B courses")
-    elif len(Y1) < 4:
-        st.error("You must select at least 4 courses in Year 1")
+if st.button("Invia piano di studio"):
+    
+    if not name or not email:
+        st.error("Inserisci nome ed email prima di inviare.")
+    elif not selected_courses:
+        st.error("Seleziona almeno un corso.")
     else:
-        st.success("Plan submitted successfully!")
+        st.success("Piano inviato correttamente!")
 
-        df = pd.DataFrame(selected)
-        df["name"] = name
-        df["cycle"] = cycle
-        df["year_plan"] = year_label
-        df["timestamp"] = datetime.now()
+        # Mostra riepilogo
+        st.write("## Riepilogo")
+        st.write(f"**Nome:** {name}")
+        st.write(f"**Email:** {email}")
+        st.write("**Corsi scelti:**")
 
-        try:
-            old = pd.read_csv("plans.csv")
-            df = pd.concat([old, df])
-        except:
-            pass
-
-        df.to_csv("plans.csv", index=False)
+        for course in selected_courses:
+            st.write(f"- {course}")
