@@ -207,76 +207,76 @@ if admin_mode:
     if df.empty:
         st.write("No data yet")
 
-# ======================
-# STUDENTS → COURSES
-# ======================
-
-st.subheader("Students and their courses")
-
-if df.empty:
-    st.write("No data available")
-
-elif "name" not in df.columns or "course" not in df.columns:
-    st.warning("Required columns not found")
-
-else:
-
-    student_courses = {}
-
-    for _, row in df.iterrows():
-
-        student = row.get("name")
-        courses_raw = row.get("course")
-
-        if pd.isna(student) or pd.isna(courses_raw):
-            continue
-
-        courses_list = [
-            c.strip() for c in str(courses_raw).split(",") if c.strip()
-        ]
-
-        student_courses.setdefault(student, []).extend(courses_list)
-
-    if student_courses:
-
-        for student in sorted(student_courses):
-
-            courses = sorted(set(student_courses[student]))
-
-            with st.expander(student):
-                for c in courses:
-                    st.write(f"- {c}")
-
     else:
-        st.write("No data available")
 
-# ======================
-# COURSE COUNTS
-# ======================
+        # ======================
+        # STUDENTS → COURSES
+        # ======================
+        st.subheader("Students and their courses")
 
-st.subheader("Students per course")
+        if "name" not in df.columns or "course" not in df.columns:
+            st.warning("Required columns not found")
 
-course_counts = {}
+        else:
 
-if "course" in df.columns:
+            student_courses = {}
 
-    for row in df["course"]:
+            for _, row in df.iterrows():
 
-        if pd.isna(row):
-            continue
+                student = row.get("name")
+                courses_raw = row.get("course")
 
-        courses_list = [
-            c.strip() for c in str(row).split(",") if c.strip()
-        ]
+                if pd.isna(student) or pd.isna(courses_raw):
+                    continue
 
-        for c in courses_list:
-            course_counts[c] = course_counts.get(c, 0) + 1
+                courses_list = [
+                    c.strip() for c in str(courses_raw).split(",") if c.strip()
+                ]
 
-    if course_counts:
-        for course, count in sorted(course_counts.items()):
-            st.write(f"- {course}: {count}")
-    else:
-        st.write("No courses found")
+                student_courses.setdefault(student, []).extend(courses_list)
+
+            if student_courses:
+
+                for student in sorted(student_courses):
+
+                    courses = sorted(set(student_courses[student]))
+
+                    with st.expander(student):
+                        for c in courses:
+                            st.write(f"- {c}")
+
+            else:
+                st.write("No data available")
+
+        # ======================
+        # COURSE COUNTS
+        # ======================
+        st.subheader("Students per course")
+
+        course_counts = {}
+
+        if "course" in df.columns:
+
+            for row in df["course"]:
+
+                if pd.isna(row):
+                    continue
+
+                courses_list = [
+                    c.strip() for c in str(row).split(",") if c.strip()
+                ]
+
+                for c in courses_list:
+                    course_counts[c] = course_counts.get(c, 0) + 1
+
+            if course_counts:
+                for course, count in sorted(course_counts.items()):
+                    st.write(f"- {course}: {count}")
+            else:
+                st.write("No courses found")
+
+        else:
+            st.warning("Column 'course' not found")
 
 else:
     st.warning("Column 'course' not found")
