@@ -9,11 +9,9 @@ courses:
     phase: A
     years: [2025]
     description: | 
-      Fondamenti di programmazione
-      
-      Strutture decisionali
-      
-      Iterazione
+      Fondamenti di programmazione  
+      Strutture decisionali  
+      Iterazione  
       Strutture dati
       Funzioni
       Gestione dati
