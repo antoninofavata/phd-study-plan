@@ -261,24 +261,24 @@ st.subheader("📊 Students per course")
 course_counts = {}
 
 if "course" in df.columns:
-    
-        for row in df["course"]:
-    
-            if pd.isna(row):
-                continue
-    
-            courses_list = [
-                c.strip() for c in str(row).split(",") if c.strip()
-            ]
-    
-            for c in courses_list:
-                course_counts[c] = course_counts.get(c, 0) + 1
-    
-        if course_counts:
-            for course, count in sorted(course_counts.items()):
-                st.write(f"- {course}: {count}")
-        else:
-            st.write("No courses found")
-    
+
+    for row in df["course"]:
+
+        if pd.isna(row):
+            continue
+
+        courses_list = [
+            c.strip() for c in str(row).split(",") if c.strip()
+        ]
+
+        for c in courses_list:
+            course_counts[c] = course_counts.get(c, 0) + 1
+
+    if course_counts:
+        for course, count in sorted(course_counts.items()):
+            st.write(f"- {course}: {count}")
+    else:
+        st.write("No courses found")
+
 else:
     st.warning("Column 'course' not found")
