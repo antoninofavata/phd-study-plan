@@ -1,14 +1,21 @@
 import streamlit as st
 
-st.set_page_config(initial_sidebar_state="collapsed")
-import streamlit as st
+# ======================
+# CONFIG (DEVE ESSERE SUBITO QUI)
+# ======================
+
+st.set_page_config(
+    page_title="PhD Study Plan",
+    initial_sidebar_state="collapsed"
+)
+
 import yaml
 import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 
 # ======================
-# CONFIG
+# CONFIG ADMIN
 # ======================
 
 ADMIN_PASSWORD = "cambia_questa_password"
@@ -33,7 +40,7 @@ def connect():
     return gspread.authorize(creds)
 
 # ======================
-# LOAD DATA
+# LOAD & SAVE DATA
 # ======================
 
 def load_data():
@@ -41,15 +48,10 @@ def load_data():
     sheet = client.open_by_key(SHEET_ID).sheet1
     return sheet.get_all_records()
 
-# ======================
-# SAVE DATA
-# ======================
-
 def save_data(name, cycle, courses):
     client = connect()
     sheet = client.open_by_key(SHEET_ID).sheet1
 
-    # trasformo lista corsi in stringa leggibile
     courses_str = ", ".join(courses)
 
     sheet.append_row([name, cycle, courses_str])
@@ -71,8 +73,7 @@ st.title("PhD Study Plan")
 # ADMIN LOGIN
 # ======================
 
-st.sidebar.header("Admin Login")
-password = st.sidebar.text_input("Password", type="password")
+password = st.sidebar.text_input("Admin password", type="password")
 
 # ======================
 # COURSE CATALOGUE
@@ -163,14 +164,6 @@ if st.button("Submit Study Plan"):
 
         st.success("Study plan submitted successfully!")
 
-        st.write("## Submitted Data")
-        st.write(f"**Name:** {name}")
-        st.write(f"**Cycle:** {cycle}")
-
-        st.write("**Courses:**")
-        for course in selected_courses:
-            st.write(f"- {course}")
-
 # ======================
 # ADMIN DASHBOARD
 # ======================
@@ -189,7 +182,6 @@ if password == ADMIN_PASSWORD:
 
         st.write("### Students per course")
 
-        # conteggio corsi (split stringa)
         all_courses = []
 
         for row in df["Courses"]:
