@@ -125,7 +125,9 @@ for s in sectors:
                     st.markdown("**Description**")
                     st.write(c["description"])
 
-                st.markdown("---")
+                if "program" in c:
+                st.markdown("**Program**")
+                st.markdown(c["program"])
 
 # ======================
 # RULES
