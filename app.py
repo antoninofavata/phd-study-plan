@@ -1,26 +1,19 @@
 import streamlit as st
+import yaml
+import gspread
+import json
+import pandas as pd
+from google.oauth2.service_account import Credentials
 
 # ======================
-# CONFIG (DEVE STARE SUBITO QUI)
+# CONFIG
 # ======================
 
 st.set_page_config(
     page_title="PhD Study Plan",
+    layout="wide",
     initial_sidebar_state="collapsed"
 )
-
-import yaml
-import pandas as pd
-import gspread
-from google.oauth2.service_account import Credentials
-
-# ======================
-# CONFIG ADMIN
-# ======================
-
-ADMIN_PASSWORD = "sge.uniroma1@26"
-
-SHEET_ID = "1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM"
 
 # ======================
 # CONNECT GOOGLE SHEETS
@@ -40,40 +33,32 @@ def connect():
     return gspread.authorize(creds)
 
 # ======================
-# LOAD & SAVE DATA
-# ======================
-
-def load_data():
-    client = connect()
-    sheet = client.open_by_key(SHEET_ID).sheet1
-    return sheet.get_all_records()
-
-def save_data(name, cycle, courses):
-    client = connect()
-    sheet = client.open_by_key(SHEET_ID).sheet1
-
-    courses_str = ", ".join(courses)
-
-    sheet.append_row([name, cycle, courses_str])
-
-# ======================
-# LOAD COURSES
+# LOAD DATA
 # ======================
 
 with open("courses.yaml", "r") as f:
     courses = yaml.safe_load(f)["courses"]
 
 # ======================
+# LOAD GOOGLE SHEET
+# ======================
+
+client = connect()
+sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
+
+# ======================
 # TITLE
 # ======================
 
-st.title("PhD Study Plan")
+st.title("📘 PhD Study Plan")
 
 # ======================
 # ADMIN LOGIN
 # ======================
 
-password = st.sidebar.text_input("Admin password", type="password")
+st.sidebar.header("Admin")
+
+admin_mode = st.sidebar.checkbox("Enable admin mode")
 
 # ======================
 # COURSE CATALOGUE
@@ -81,14 +66,29 @@ password = st.sidebar.text_input("Admin password", type="password")
 
 st.header("Course Catalogue")
 
+# ----------------------
+# PHASE A
+# ----------------------
+
 st.subheader("Phase A")
 
 for c in courses:
     if c["phase"] == "A":
         years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-        with st.expander(f"{c['name']} ({years_str})"):
-            st.write("Methodological course")
-            st.write(f"Available in: {years_str}")
+
+        with st.expander(c["name"]):
+
+            st.markdown(f"📅 **Available in:** {years_str}")
+
+            if "description" in c:
+                st.markdown("**📝 Description**")
+                st.write(c["description"])
+
+            st.markdown("---")
+
+# ----------------------
+# PHASE B
+# ----------------------
 
 st.subheader("Phase B")
 
@@ -96,12 +96,21 @@ sectors = sorted(set(c.get("sector", "") for c in courses if c["phase"] == "B"))
 
 for s in sectors:
     st.markdown(f"### {s}")
+
     for c in courses:
         if c["phase"] == "B" and c.get("sector") == s:
+
             years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-            with st.expander(f"{c['name']} ({years_str})"):
-                st.write(f"Sector: {s}")
-                st.write(f"Available in: {years_str}")
+
+            with st.expander(c["name"]):
+
+                st.markdown(f"📅 **Available in:** {years_str}")
+
+                if "description" in c:
+                    st.markdown("**📝 Description**")
+                    st.write(c["description"])
+
+                st.markdown("---")
 
 # ======================
 # RULES
@@ -116,7 +125,7 @@ st.markdown("""
 """)
 
 # ======================
-# STUDENT FORM
+# STUDENT INFO
 # ======================
 
 st.header("Create your Study Plan")
@@ -124,12 +133,17 @@ st.header("Create your Study Plan")
 name = st.text_input("Name")
 cycle = st.text_input("Cycle")
 
+# ======================
+# COURSE SELECTION
+# ======================
+
 st.header("Select your courses")
 
 selected_courses = []
 
 for c in courses:
     years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
+
     label = f"{c['name']} ({years_str})"
 
     if st.checkbox(label):
@@ -160,53 +174,43 @@ if st.button("Submit Study Plan"):
         st.error("Please select at least one course.")
 
     else:
-        save_data(name, cycle, selected_courses)
+        # salva su Google Sheets
+        sheet.append_row([
+            name,
+            cycle,
+            ", ".join(selected_courses)
+        ])
+
         st.success("Study plan submitted successfully!")
 
 # ======================
 # ADMIN DASHBOARD
 # ======================
 
-if password == ADMIN_PASSWORD:
+if admin_mode:
+
+    st.sidebar.success("Admin mode ON")
+
+    data = sheet.get_all_records()
+    df = pd.DataFrame(data)
 
     st.header("📊 Admin Dashboard")
 
-    data = load_data()
+    if not df.empty:
 
-    if data:
-        df = pd.DataFrame(data)
+        st.subheader("Students per course")
 
-        st.write("### All submissions")
-        st.dataframe(df)
+        # conta iscritti per corso
+        course_counts = {}
 
-        st.write("### Students per course")
+        for row in df["course"]:
+            courses_list = [c.strip() for c in row.split(",")]
 
-        all_courses = []
+            for c in courses_list:
+                course_counts[c] = course_counts.get(c, 0) + 1
 
-        if "course" in df.columns or "Courses" in df.columns:
-
-            col_name = "course" if "course" in df.columns else "Courses"
-
-            for row in df[col_name]:
-                all_courses.extend([c.strip() for c in row.split(",")])
-
-            counts = pd.Series(all_courses).value_counts()
-
-            df_counts = counts.reset_index()
-            df_counts.columns = ["Course", "Number of students"]
-
-            df_counts = df_counts.sort_values(
-                by="Number of students",
-                ascending=False
-            )
-
-            st.table(df_counts)
-
-        else:
-            st.error("Column 'course' not found")
+        for course, count in course_counts.items():
+            st.write(f"- {course}: {count}")
 
     else:
         st.write("No data yet")
-
-elif password:
-    st.warning("Wrong password")
