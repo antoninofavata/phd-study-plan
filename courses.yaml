@@ -331,6 +331,23 @@ courses:
       material nonlinearities, as well as geometric effects such as large deformations and rotations.
       Finally, selected topics related to numerical pathologies in finite element analysis are discussed, together
       with commonly adopted solution techniques and mitigation strategies.
+    program: |
+        Lecture 1: Displacement-based FE formulation.
+        
+        Lecture 2: Multi-field mixed formulations derived from extended variational
+        functionals.
+        
+        Lecture 3: Euler-Bernoulli and Timoshenko beam FE: forced-based approach,
+        Lagrangian, Isoparametric, Serendipity FE families for 2D and 3D problems.
+        
+        Lecture 4: FE formulations for thin and thick plates and shells. Convergence issues,
+        stress recovery, reduced integration. Shear locking problems.
+        
+        Lecture 5: FE nonlinear formulations including nonlinear constitutive laws and
+        large displacements and strains.
+        
+        Lecture 6: Implementation of the FE procedure in MATLAB. Examples and
+        applications on simple problems.
 
 
   # ======================
