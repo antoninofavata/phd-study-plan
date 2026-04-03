@@ -252,11 +252,18 @@ st.subheader("📊 Students per course")
 
 course_counts = {}
 
+# ======================
+# COURSE COUNTS
+# ======================
+
+st.subheader("📊 Students per course")
+
+course_counts = {}
+
 if "course" in df.columns:
 
-    course_counts = {}
-
     for row in df["course"]:
+
         if pd.isna(row):
             continue
 
