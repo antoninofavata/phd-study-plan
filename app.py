@@ -216,6 +216,9 @@ st.subheader("👨‍🎓 Students and their courses")
 
 if "name" in df.columns and "course" in df.columns:
 
+    # raggruppa i corsi per studente
+    student_courses = {}
+
     for _, row in df.iterrows():
 
         student = row["name"]
@@ -228,13 +231,23 @@ if "name" in df.columns and "course" in df.columns:
             c.strip() for c in str(courses_raw).split(",") if c.strip()
         ]
 
+        if student not in student_courses:
+            student_courses[student] = []
+
+        student_courses[student].extend(courses_list)
+
+    # mostra una sola volta per studente
+    for student, courses in student_courses.items():
+
+        # elimina duplicati (se presenti)
+        courses = sorted(set(courses))
+
         with st.expander(student):
-            for c in courses_list:
+            for c in courses:
                 st.write(f"- {c}")
 
 else:
-    st.warning("Required columns not found")
-       # ======================
+    st.warning("Required columns not found")       # ======================
 # COURSE COUNTS
 # ======================
 
