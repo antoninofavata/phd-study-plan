@@ -119,16 +119,18 @@ for s in sectors:
             years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
 
             with st.expander(c["name"]):
-                st.markdown(f"**Available in:** {years_str}")
+                 st.markdown(f"**Available in:** {years_str}")
 
-                
-                if "description" in c:
-                    st.markdown("**Description**")
-                    st.write(c["description"])
+            if "professor" in c:
+                st.markdown(f"**Professor:** {c['professor']}")
 
-                if "program" in c:
-                    st.markdown("**Program**")
-                    st.markdown(c["program"])
+            if "description" in c:
+                st.markdown("**Description**")
+                st.write(c["description"])
+
+            if "program" in c:
+                st.markdown("**Program**")
+                st.markdown(c["program"])
 
                 
 
