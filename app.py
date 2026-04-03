@@ -1,7 +1,4 @@
-import streamlit as st
 
-st.write("ADMIN:", st.secrets.get("app", {}).get("ADMIN_PASSWORD"))
-st.write("GCP:", "gcp_service_account" in st.secrets)
 import streamlit as st
 
 
