@@ -247,13 +247,9 @@ if "name" in df.columns and "course" in df.columns:
                 st.write(f"- {c}")
 
 else:
-    st.warning("Required columns not found")       # ======================
-# COURSE COUNTS
-# ======================
+    st.warning("Required columns not found")      
 
-st.subheader("📊 Students per course")
 
-course_counts = {}
 
 # ======================
 # COURSE COUNTS
