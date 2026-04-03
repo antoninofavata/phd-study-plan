@@ -109,10 +109,10 @@ for s in sectors:
 
             with st.expander(c["name"]):
 
-                st.markdown(f"📅 **Available in:** {years_str}")
+                st.markdown(f" **Available in:** {years_str}")
 
                 if "description" in c:
-                    st.markdown("**📝 Description**")
+                    st.markdown("** Description**")
                     st.write(c["description"])
 
                 st.markdown("---")
