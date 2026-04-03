@@ -6,7 +6,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-import streamlit as st
 import yaml
 import gspread
 import json
