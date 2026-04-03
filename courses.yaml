@@ -311,6 +311,26 @@ courses:
     phase: B
     sector: "Mechanics of Solids and Structures"
     years: [2026]
+    professor: "Daniela Addessi"
+    description: |
+      This course provides a comprehensive introduction to the fundamentals of the Finite Element Method
+      (FEM) for the numerical solution of general mechanical problems, with particular emphasis on structural
+      applications. Building on the current state of the art, the course examines selected advanced topics and
+      emerging trends in the finite element modeling of both linear and nonlinear problems in computational
+      mechanics. Particular attention is devoted to the identification of key challenges and the discussion of
+      appropriate solution strategies, especially within the structural domain.
+      
+      The course begins with the presentation of the classical displacement-based formulation, which
+      represents the standard approach adopted in most finite element codes. Subsequently, two-field and three-
+      field mixed finite element formulations are introduced and discussed.
+      
+      An overview of the principal finite element families employed in the analysis of 1D, 2D, and 3D
+      continuum problems is provided, including truss, frame, solid, plate, and shell elements. The formulation,
+      applicability, and limitations of these element types are examined.
+      The course further addresses the main sources of nonlinear behavior in structural systems, including
+      material nonlinearities, as well as geometric effects such as large deformations and rotations.
+      Finally, selected topics related to numerical pathologies in finite element analysis are discussed, together
+      with commonly adopted solution techniques and mitigation strategies.
 
 
   # ======================
