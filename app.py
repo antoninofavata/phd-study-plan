@@ -55,20 +55,14 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 # ADMIN LOGIN
 # ======================
 
-st.sidebar.header("Admin")
+admin_password = st.secrets.get("ADMIN_PASSWORD", "")
 
 password = st.sidebar.text_input("Password", type="password")
 
-admin_password = st.secrets.get("ADMIN_PASSWORD", None)
+admin_mode = (password == admin_password)
 
-# 👇 DEBUG QUI
 st.sidebar.write("Inserita:", repr(password))
 st.sidebar.write("Salvata:", repr(admin_password))
-
-admin_mode = False
-
-if admin_password is not None and password == admin_password:
-    admin_mode = True
 
 # ======================
 # COURSE CATALOGUE
