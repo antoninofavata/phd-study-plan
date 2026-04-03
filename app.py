@@ -1,7 +1,4 @@
-import streamlit as st
 
-st.write("ADMIN:", st.secrets.get("app", {}).get("ADMIN_PASSWORD"))
-st.write("GCP:", "gcp_service_account" in st.secrets)
 import streamlit as st
 
 
@@ -70,8 +67,7 @@ if password:
     st.session_state.admin_mode = (password == admin_password)
 admin_mode = st.session_state.admin_mode
 
-st.sidebar.write("Inserita:", repr(password))
-st.sidebar.write("Salvata:", repr(admin_password))
+
 st.sidebar.write("Admin mode:", admin_mode)
 
 
