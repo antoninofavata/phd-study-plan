@@ -375,6 +375,14 @@ courses:
     phase: B
     sector: "Structural Engineering"
     years: [2025]
+    professor: "Stefano Pampanin"
+    program: |
+      - Overview of the Canterbury earthquakes sequence: lessons learnt, impact on performance-based design philosophy and opportunity for a wide implementation of the next generation of damage-resisting structures
+      - Alternative design philosophies and solutions for the seismic design of precast concrete structures. Emulation of cast-in situ concrete. Introduction to jointed ductile connections,  
+      - Research and Development of PRESSS-concrete Technology and the hybrid system concept. Research & Development of these systems.  
+      - Extension to Timber: development of multi-storey long-span prestressed timber (Pres-Lam) buildings using engineered wood materials (Glulam, LVL, Cross-Lam)
+      - Examples of on-site applications worldwide of PRESSS and PRES-LAM technology in low-, medium- or high-seismic areas. Constructability aspects, sequence and detailing.
+      - Cost/Performance evaluation of low-damage technologies. Resilience and Sustainability considerations
 
   - id: B6
     name: "Seismic Safety and Sustainability: Next Generation of Low-Damage Concrete and Timber Buildings"
