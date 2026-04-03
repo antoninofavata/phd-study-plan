@@ -89,7 +89,6 @@ for c in courses:
                 st.markdown(f"**Professor:** {c['professor']}")
 
             if "description" in c:
-                st.markdown("**Description**")
                 st.write(c["description"])
 
             st.markdown("---")
