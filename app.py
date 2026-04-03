@@ -48,7 +48,7 @@ sheet = client.open_by_key(
 # TITLE
 # ======================
 
-st.title("PhD Program in Structural and Geotechnical Engineering")
+st.title("PhD  in Structural and Geotechnical Engineering")
 
 # ======================
 # ADMIN LOGIN
@@ -124,6 +124,10 @@ for s in sectors:
                 if "description" in c:
                     st.markdown("**Description**")
                     st.write(c["description"])
+
+                if "program" in c:
+                    st.markdown("**Program**")
+                    st.markdown(c["program"])
 
                 
 
