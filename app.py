@@ -141,13 +141,30 @@ def connect():
     client = gspread.authorize(creds)
     return client
 
+import streamlit as st
+import gspread
+from google.oauth2.service_account import Credentials
+
+def connect():
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=scope
+    )
+
+    client = gspread.authorize(creds)
+    return client
+
 st.title("Test Google Sheets")
 
-if st.button("Scrivi test su Sheets"):
-    client = connect()
+client = connect()
 
-    sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
+sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
 
-    sheet.append_row(["Test", "Funziona", "OK"])
-    
-    st.success("Riga scritta con successo!")
+if st.button("Scrivi su Google Sheet"):
+    sheet.append_row(["Test", "Funziona"])
+    st.success("Scrittura OK!")
