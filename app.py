@@ -21,7 +21,6 @@ def connect():
     client = gspread.authorize(creds)
     return client
 
-
 # ======================
 # LOAD DATA
 # ======================
@@ -97,7 +96,7 @@ name = st.text_input("Name")
 cycle = st.text_input("Cycle")
 
 # ======================
-# SELECTION
+# COURSE SELECTION
 # ======================
 
 st.header("Select your courses")
@@ -140,12 +139,13 @@ if st.button("Submit Study Plan"):
             client = connect()
             sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
 
-        for course in selected_courses:
-    sheet.append_row([
-        name,
-        cycle,
-        course
-    ])
+            # Scrive una riga per ogni corso
+            for course in selected_courses:
+                sheet.append_row([
+                    name,
+                    cycle,
+                    course
+                ])
 
             st.success("Study plan submitted and saved!")
 
@@ -153,7 +153,7 @@ if st.button("Submit Study Plan"):
             st.error("Error saving data to Google Sheets")
             st.write(e)
 
-        # Show summary
+        # Mostra riepilogo
         st.write("## Submitted Data")
         st.write(f"**Name:** {name}")
         st.write(f"**Cycle:** {cycle}")
