@@ -85,7 +85,7 @@ for c in courses:
 
             if "description" in c:
                 st.markdown("**Description**")
-                st.text(c["description"])
+                st.markdown(c["description"])
 
             
 
