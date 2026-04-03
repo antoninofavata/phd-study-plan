@@ -214,7 +214,23 @@ if admin_mode:
         # ======================
         st.subheader("👨‍🎓 Students and their courses")
 
-        if "student" in df.columns and "course" in df.columns:
+        if "name" in df.columns and "course" in df.columns:
+
+    for _, row in df.iterrows():
+        student = row["name"]  # <-- FIX
+
+        courses_raw = row["course"]
+
+        if pd.isna(courses_raw):
+            continue
+
+        courses_list = [
+            c.strip() for c in str(courses_raw).split(",") if c.strip()
+        ]
+
+        with st.expander(student):
+            for c in courses_list:
+                st.write(f"- {c}")
 
             for _, row in df.iterrows():
                 student = row["student"]
