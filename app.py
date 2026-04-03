@@ -81,7 +81,7 @@ for c in courses:
             st.markdown(f"📅 **Available in:** {years_str}")
 
             if "professor" in c:
-                st.markdown(f"Professor: {c['professor']}")
+                st.markdown(f"**Professor:** {c['professor']}")
 
             if "description" in c:
                 st.markdown("**📝 Description**")
