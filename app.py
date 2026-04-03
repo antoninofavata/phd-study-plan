@@ -207,7 +207,6 @@ if admin_mode:
     if df.empty:
         st.write("No data yet")
 
-    else:
 
      # ======================
 # STUDENTS → COURSES
