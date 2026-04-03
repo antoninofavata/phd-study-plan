@@ -280,5 +280,5 @@ if "course" in df.columns:
         else:
             st.write("No courses found")
     
-        else:
-            st.warning("Column 'course' not found")
+else:
+    st.warning("Column 'course' not found")
