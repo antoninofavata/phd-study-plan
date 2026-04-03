@@ -217,9 +217,9 @@ if admin_mode:
         if "name" in df.columns and "course" in df.columns:
     
             for _, row in df.iterrows():
-            student = row["name"]  # <-- FIX
-    
-            courses_raw = row["course"]
+                student = row["name"]  # <-- FIX
+        
+                courses_raw = row["course"]
 
         if pd.isna(courses_raw):
             continue
