@@ -417,6 +417,19 @@ courses:
     phase: B
     sector: "Geotechnical Engineering"
     years: [2025]
+    professor: "Angelo Amorosi"
+    description: |
+      This 6 days course is aimed at introducing, at the post-graduate level, the basic principles of the mechanics of soils by 
+      discussing some of their experimental features and constitutive modelling strategies, with particular emphasis to clayey materials. 
+      The fundamental field equations for a two-phase medium are first derived, followed by an overview of typical experimental results and 
+      their interpretation in the frame of Critical State Soil Mechanics.
+      
+      The key ingredients of plasticity theory are then introduced, first under 1D conditions and then generalised to 3D ones, aiming at providing the general theoretical setting then adopted to illustrate a wide class of plasticity-based models for soils, ranging from standard perfectly plastic ones to more advanced mixed-hardening multi-surface formulations.
+      An alternative constitutive approach based on thermodynamics with internal variables is introduced and its merits are illustrated with r
+      eference to different forms of elasto-plastic coupling of soils. 
+      
+      Finally, the above approach is generalised and applied to the development of a micro-informed thermodynamics-based constitutive framework. 
+      This is then adopted for the formulation of an innovative model accounting of double porosity and fabric of fine-grained soils.
 
   - id: B9
     name: "Numerical Modelling in Geomechanics"
