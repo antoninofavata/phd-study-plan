@@ -140,7 +140,7 @@ if st.button("Submit Study Plan"):
             client = connect()
             sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
 
-            for course in selected_courses:
+        for course in selected_courses:
     sheet.append_row([
         name,
         cycle,
