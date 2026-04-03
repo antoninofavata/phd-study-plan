@@ -18,7 +18,7 @@ from google.oauth2.service_account import Credentials
 # CONFIG ADMIN
 # ======================
 
-ADMIN_PASSWORD = "sge.uniroma1@25"
+ADMIN_PASSWORD = "sge.uniroma1@26"
 
 SHEET_ID = "1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM"
 
