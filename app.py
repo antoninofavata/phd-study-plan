@@ -240,7 +240,11 @@ if admin_mode:
         # ======================
         # COURSE COUNTS
         # ======================
-       st.subheader("Students per course")
+# ======================
+# COURSE COUNTS
+# ======================
+
+st.subheader("Students per course")
 
 course_counts = {}
 
