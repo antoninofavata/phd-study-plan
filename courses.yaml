@@ -104,6 +104,78 @@ courses:
     name: "Time Series Analysis and Data-driven Modeling"
     phase: A
     years: [2025]
+    professor: "Jacopo Ciambella"
+    program: |
+      *Lecture 1 — Structural Dynamics and the Time-Domain Foundations* (3 h)
+
+      - The structure as an input–output dynamical system; excitation sources and response quantities
+      - Sensor technologies for SHM: accelerometers, strain gauges, FBG, LVDTs; the measurement chain
+      - Linearity, superposition, time invariance; the LTI framework
+      - SDOF equation of motion, free vibration, logarithmic decrement
+      - Impulse response and Duhamel's integral for arbitrary loading
+      - MDOF eigenvalue problem, mode-shape orthogonality, modal superposition
+      - Participation factors, effective modal mass, Rayleigh damping
+      - Stationarity, ergodicity, environmental variability
+      - Observability, optimal sensor placement, damage types, the SHM data pipeline
+      
+      *Lecture 2 — Fourier Analysis, Laplace Transform, and Frequency Response* (3 h)
+      
+      - Fourier series, Fourier transform, key properties and Parseval's theorem
+      - DFT, FFT, frequency resolution, spectral leakage, windowing functions
+      - STFT, wavelet transform, spectral features for SHM
+      - Laplace transform: definition, properties, key pairs
+      - Transfer function $H(s)$, poles and zeros, $s$-plane interpretation
+      - Frequency response function $H(j\omega)$: Bode diagram, Nyquist plot, real/imaginary decomposition
+      - Resonance, half-power bandwidth, energy balance
+      - MDOF modal transfer matrix, dynamic amplification factor, transmissibility, FRF types
+      - Input–output PSD relationship and connection to output-only identification
+      
+      *Lecture 3 — Sampling, Discrete-Time Systems, and the z-Transform* (3 h)
+      
+      - Shannon–Nyquist sampling theorem, aliasing, anti-aliasing filters
+      - ADC resolution, quantisation noise, sigma-delta oversampling
+      - Multi-sensor synchronisation; sampling-rate selection for SHM
+      - Discrete-time convolution, resampling, decimation
+      - $z$-transform: definition, ROC, inverse via partial fractions
+      - Difference equations, discrete transfer function H(z)
+      - Poles, zeros, and the unit circle; stability criterion
+      - Bilinear transform, frequency warping, frequency response from H(z)
+      - AR and ARMA models for structural identification; model-order selection
+      
+      *Lecture 4 — Digital Filtering, Feature Engineering, and Output-Only Identification* (3 h)
+      
+      - FIR filter design: window method, linear phase, Parks–McClellan
+      - IIR filter design: Butterworth, Chebyshev, elliptic prototypes; zero-phase filtering
+      - Notch filtering, envelope detection via the Hilbert transform, cepstral analysis
+      - Numerical differentiation and integration of vibration signals
+      - Hand-crafted SHM features: time-domain, spectral, modal, cepstral
+      - Wiener–Khinchin theorem, PSD, cross-spectral density, coherence
+      - Spectral estimation: periodogram, Welch's method, bias–variance trade-off
+      - Operational modal analysis: FDD and EFDD damping estimation, SSI and stabilisation diagrams
+      - Uncertainty quantification of spectral and modal estimates
+      
+      *Lecture 5 — Machine Learning for Structural Health Monitoring* (3 h)
+      
+      - The ML pipeline: feature matrix, labels, temporal and grouped splitting strategies
+      - Feature scaling, PCA for dimensionality reduction and environmental normalisation
+      - Hyperparameter tuning: grid search, random search, Bayesian optimisation
+      - Supervised methods: logistic regression, SVMs, random forests, gradient boosting
+      - Unsupervised and novelty detection: one-class SVM, isolation forest, Mahalanobis distance
+      - Evaluation metrics, cost-sensitive interpretation, bias–variance trade-off
+      - MLPs, batch normalisation, loss functions for imbalanced data
+      - 1-D and 2-D CNNs for vibration signals; architecture design and training
+      - RNNs, LSTMs, GRUs; transformer-based sequence models
+      
+      *Lecture 6 — Deep Generative Models, Physics-Informed AI, and the Digital Twin* (3 h)
+      
+      - Autoencoders for anomaly detection; variational, denoising, and contractive variants
+      - Residual networks and skip connections; contrastive and self-supervised learning
+      - Transfer learning from simulation to field; data augmentation strategies
+      - Residual learning and physics-informed neural networks (PINNs)
+      - Surrogate modelling with Gaussian processes; FE model updating via ML
+      - Uncertainty quantification: Bayesian neural networks, deep ensembles, conformal prediction
+      - Interpretability: SHAP, saliency maps, domain-consistency checks
+      - The digital twin paradigm: architecture, challenges, scalability
 
   - id: A4
     name: "Experimental Methods: Laboratory and In-situ Testing"
