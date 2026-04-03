@@ -212,7 +212,7 @@ if admin_mode:
 # STUDENTS → COURSES
 # ======================
 
-st.subheader("👨‍🎓 Students and their courses")
+st.subheader("Students and their courses")
 
 if "name" in df.columns and "course" in df.columns:
 
@@ -255,7 +255,7 @@ else:
 # COURSE COUNTS
 # ======================
 
-st.subheader("📊 Students per course")
+st.subheader("Students per course")
 
 course_counts = {}
 
