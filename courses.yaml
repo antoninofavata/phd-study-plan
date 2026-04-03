@@ -202,6 +202,12 @@ courses:
     name: "Numerical Analysis for Engineering Models"
     phase: A
     years: [2026]
+    description: |
+      Numerical methods for solving engineering models, including linear and nonlinear problems; solvers for systems of equations; 
+      time and spatial integration methods; and analysis of numerical stability and accuracy. 
+      The course also covers advanced techniques for nonlinear analysis, including continuation methods for tracing solution branches, bifurcation analysis, 
+      and strategies for handling strong nonlinearities, such as incremental-iterative schemes and path-following algorithms.
+
 
   - id: A6
     name: "Functional Analysis and Variational Methods for Engineering Applications"
