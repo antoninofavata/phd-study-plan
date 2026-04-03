@@ -50,7 +50,7 @@ sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet
 # TITLE
 # ======================
 
-st.title("📘 PhD Study Plan")
+st.title("PhD Program in Structural and Geotechnical Engineering")
 
 # ======================
 # ADMIN LOGIN
