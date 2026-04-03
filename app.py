@@ -1,5 +1,26 @@
 import streamlit as st
 import yaml
+import gspread
+from google.oauth2.service_account import Credentials
+
+# ======================
+# GOOGLE SHEETS CONNECTION
+# ======================
+
+def connect():
+    scope = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive"
+    ]
+
+    creds = Credentials.from_service_account_info(
+        st.secrets["gcp_service_account"],
+        scopes=scope
+    )
+
+    client = gspread.authorize(creds)
+    return client
+
 
 # ======================
 # LOAD DATA
@@ -21,7 +42,7 @@ st.title("PhD Study Plan")
 st.header("Course Catalogue")
 
 # -----------------------
-# FASE A
+# PHASE A
 # -----------------------
 
 st.subheader("Phase A")
@@ -35,7 +56,7 @@ for c in courses:
             st.write(f"Available in: {years_str}")
 
 # -----------------------
-# FASE B
+# PHASE B
 # -----------------------
 
 st.subheader("Phase B")
@@ -88,7 +109,7 @@ for c in courses:
     label = f"{c['name']} ({years_str})"
     
     if st.checkbox(label):
-        selected_courses.append(c["name"])
+        selected_courses.append(label)
 
 # ======================
 # SUMMARY
@@ -115,8 +136,25 @@ if st.button("Submit Study Plan"):
         st.error("Please select at least one course.")
     
     else:
-        st.success("Study plan submitted successfully!")
+        try:
+            client = connect()
+            sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
 
+            courses_str = ", ".join(selected_courses)
+
+            sheet.append_row([
+                name,
+                cycle,
+                courses_str
+            ])
+
+            st.success("Study plan submitted and saved!")
+
+        except Exception as e:
+            st.error("Error saving data to Google Sheets")
+            st.write(e)
+
+        # Show summary
         st.write("## Submitted Data")
         st.write(f"**Name:** {name}")
         st.write(f"**Cycle:** {cycle}")
@@ -124,47 +162,3 @@ if st.button("Submit Study Plan"):
         st.write("**Courses:**")
         for course in selected_courses:
             st.write(f"- {course}")
-
-import streamlit as st
-import gspread
-from google.oauth2.service_account import Credentials
-
-def connect():
-    import json
-    from google.oauth2.service_account import Credentials
-    import gspread
-
-    creds = Credentials.from_service_account_info(
-        json.loads(st.secrets["GOOGLE_SERVICE_ACCOUNT"])
-    )
-    
-    client = gspread.authorize(creds)
-    return client
-
-import streamlit as st
-import gspread
-from google.oauth2.service_account import Credentials
-
-def connect():
-    scope = [
-        "https://www.googleapis.com/auth/spreadsheets",
-        "https://www.googleapis.com/auth/drive"
-    ]
-
-    creds = Credentials.from_service_account_info(
-        st.secrets["gcp_service_account"],
-        scopes=scope
-    )
-
-    client = gspread.authorize(creds)
-    return client
-
-st.title("Test Google Sheets")
-
-client = connect()
-
-sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
-
-if st.button("Scrivi su Google Sheet"):
-    sheet.append_row(["Test", "Funziona"])
-    st.success("Scrittura OK!")
