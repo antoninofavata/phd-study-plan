@@ -260,8 +260,11 @@ courses:
         Applications will also be presented, with reference to case studies implemented in software capable of performing symbolic analysis.
     program: |
       *Introduction*
+      
       The dynamic model of a structure: kinematic parameters describing motion; rheological models representing the constitutive behavior of structures; actions acting on structures. Linear and nonlinear structural models; equations of motion.
+     
       *Linear Dynamics*
+      
       Harmonic motion. Free dynamics of the “simple harmonic oscillator.” Effect of damping on the free dynamic response of the “simple oscillator.” State-space representation of the equations of motion. Dynamic stability of a mechanical system.
       Forced dynamics: direct resonance in harmonically excited systems. Resonance in parametrically excited systems.
       Multiple-degree-of-freedom (MDoF) systems. Modal analysis and its applications in linear dynamic systems through the modal expansion theorem.
