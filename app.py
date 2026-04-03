@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ======================
-# CONFIG (DEVE ESSERE SUBITO QUI)
+# CONFIG (DEVE STARE SUBITO QUI)
 # ======================
 
 st.set_page_config(
@@ -18,7 +18,7 @@ from google.oauth2.service_account import Credentials
 # CONFIG ADMIN
 # ======================
 
-ADMIN_PASSWORD = "sge_uniroma1@25"
+ADMIN_PASSWORD = "cambia_questa_password"
 
 SHEET_ID = "1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM"
 
@@ -161,7 +161,6 @@ if st.button("Submit Study Plan"):
 
     else:
         save_data(name, cycle, selected_courses)
-
         st.success("Study plan submitted successfully!")
 
 # ======================
@@ -184,17 +183,27 @@ if password == ADMIN_PASSWORD:
 
         all_courses = []
 
-        for row in df["course"]:
-            all_courses.extend([c.strip() for c in row.split(",")])
+        if "course" in df.columns or "Courses" in df.columns:
 
-        counts = pd.Series(all_courses).value_counts()
+            col_name = "course" if "course" in df.columns else "Courses"
 
-       st.write("### Students per course")
+            for row in df[col_name]:
+                all_courses.extend([c.strip() for c in row.split(",")])
 
-df_counts = counts.reset_index()
-df_counts.columns = ["Course", "Number of students"]
+            counts = pd.Series(all_courses).value_counts()
 
-st.table(df_counts)
+            df_counts = counts.reset_index()
+            df_counts.columns = ["Course", "Number of students"]
+
+            df_counts = df_counts.sort_values(
+                by="Number of students",
+                ascending=False
+            )
+
+            st.table(df_counts)
+
+        else:
+            st.error("Column 'course' not found")
 
     else:
         st.write("No data yet")
