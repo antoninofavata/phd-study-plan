@@ -1,4 +1,12 @@
 import streamlit as st
+
+st.set_page_config(
+    page_title="PhD Study Plan",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
+
+import streamlit as st
 import yaml
 import gspread
 import json
