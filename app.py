@@ -92,6 +92,10 @@ for c in courses:
                 st.markdown("**Description**")
                 st.write(c["description"])
 
+            if "program" in c:
+                st.markdown("**Program**")
+                st.markdown(c["program"])
+
             st.markdown("---")
 
 # ----------------------
