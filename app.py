@@ -58,11 +58,11 @@ st.sidebar.header("Admin")
 
 password = st.sidebar.text_input("Password", type="password")
 
-admin_mode = False
-
 admin_password = st.secrets.get("ADMIN_PASSWORD", None)
 
-if admin_password and password == admin_password:
+admin_mode = False
+
+if admin_password is not None and password == admin_password:
     admin_mode = True
 
 # ======================
