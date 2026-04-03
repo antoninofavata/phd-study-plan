@@ -54,13 +54,7 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 # ======================
 # ADMIN LOGIN
 # ======================
-‎app.py‎
-+10-3Lines changed: 10 additions & 3 deletions
-Original file line number	Diff line number	Diff line change
-@@ -55,14 +55,21 @@ def connect():
-# ADMIN LOGIN
-# ======================
-
+‎
 import streamlit as st
 admin_password = st.secrets.get("ADMIN_PASSWORD", "")
 
