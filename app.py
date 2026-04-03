@@ -1,6 +1,5 @@
 import streamlit as st
 
-st.write(st.secrets) 
 
 st.set_page_config(
     page_title="PhD Program in Structural and Geotechnical Engineering",
