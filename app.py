@@ -1,17 +1,19 @@
 import streamlit as st
-
-st.sidebar.header("Admin Login")
-
-password = st.sidebar.text_input("Password", type="password")
-
-ADMIN_PASSWORD = "sge_26"
-import streamlit as st
 import yaml
+import pandas as pd
 import gspread
 from google.oauth2.service_account import Credentials
 
 # ======================
-# GOOGLE SHEETS CONNECTION
+# CONFIG
+# ======================
+
+ADMIN_PASSWORD = "cambia_questa_password"
+
+SHEET_ID = "1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM"
+
+# ======================
+# CONNECT GOOGLE SHEETS
 # ======================
 
 def connect():
@@ -25,11 +27,32 @@ def connect():
         scopes=scope
     )
 
-    client = gspread.authorize(creds)
-    return client
+    return gspread.authorize(creds)
 
 # ======================
 # LOAD DATA
+# ======================
+
+def load_data():
+    client = connect()
+    sheet = client.open_by_key(SHEET_ID).sheet1
+    return sheet.get_all_records()
+
+# ======================
+# SAVE DATA
+# ======================
+
+def save_data(name, cycle, courses):
+    client = connect()
+    sheet = client.open_by_key(SHEET_ID).sheet1
+
+    # trasformo lista corsi in stringa leggibile
+    courses_str = ", ".join(courses)
+
+    sheet.append_row([name, cycle, courses_str])
+
+# ======================
+# LOAD COURSES
 # ======================
 
 with open("courses.yaml", "r") as f:
@@ -42,28 +65,26 @@ with open("courses.yaml", "r") as f:
 st.title("PhD Study Plan")
 
 # ======================
+# ADMIN LOGIN
+# ======================
+
+st.sidebar.header("Admin Login")
+password = st.sidebar.text_input("Password", type="password")
+
+# ======================
 # COURSE CATALOGUE
 # ======================
 
 st.header("Course Catalogue")
-
-# -----------------------
-# PHASE A
-# -----------------------
 
 st.subheader("Phase A")
 
 for c in courses:
     if c["phase"] == "A":
         years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-        
         with st.expander(f"{c['name']} ({years_str})"):
             st.write("Methodological course")
             st.write(f"Available in: {years_str}")
-
-# -----------------------
-# PHASE B
-# -----------------------
 
 st.subheader("Phase B")
 
@@ -71,15 +92,12 @@ sectors = sorted(set(c.get("sector", "") for c in courses if c["phase"] == "B"))
 
 for s in sectors:
     st.markdown(f"### {s}")
-    
     for c in courses:
         if c["phase"] == "B" and c.get("sector") == s:
             years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-            
             with st.expander(f"{c['name']} ({years_str})"):
                 st.write(f"Sector: {s}")
                 st.write(f"Available in: {years_str}")
-                st.write("Detailed description coming soon...")
 
 # ======================
 # RULES
@@ -94,17 +112,13 @@ st.markdown("""
 """)
 
 # ======================
-# STUDENT INFO
+# STUDENT FORM
 # ======================
 
 st.header("Create your Study Plan")
 
 name = st.text_input("Name")
 cycle = st.text_input("Cycle")
-
-# ======================
-# COURSE SELECTION
-# ======================
 
 st.header("Select your courses")
 
@@ -113,9 +127,9 @@ selected_courses = []
 for c in courses:
     years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
     label = f"{c['name']} ({years_str})"
-    
+
     if st.checkbox(label):
-        selected_courses.append(label)
+        selected_courses.append(c["name"])
 
 # ======================
 # SUMMARY
@@ -137,30 +151,15 @@ if st.button("Submit Study Plan"):
 
     if not name or not cycle:
         st.error("Please fill in all required fields.")
-    
+
     elif not selected_courses:
         st.error("Please select at least one course.")
-    
+
     else:
-        try:
-            client = connect()
-            sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
+        save_data(name, cycle, selected_courses)
 
-            # Scrive una riga per ogni corso
-            for course in selected_courses:
-                sheet.append_row([
-                    name,
-                    cycle,
-                    course
-                ])
+        st.success("Study plan submitted successfully!")
 
-            st.success("Study plan submitted and saved!")
-
-        except Exception as e:
-            st.error("Error saving data to Google Sheets")
-            st.write(e)
-
-        # Mostra riepilogo
         st.write("## Submitted Data")
         st.write(f"**Name:** {name}")
         st.write(f"**Cycle:** {cycle}")
@@ -168,3 +167,37 @@ if st.button("Submit Study Plan"):
         st.write("**Courses:**")
         for course in selected_courses:
             st.write(f"- {course}")
+
+# ======================
+# ADMIN DASHBOARD
+# ======================
+
+if password == ADMIN_PASSWORD:
+
+    st.header("📊 Admin Dashboard")
+
+    data = load_data()
+
+    if data:
+        df = pd.DataFrame(data)
+
+        st.write("### All submissions")
+        st.dataframe(df)
+
+        st.write("### Students per course")
+
+        # conteggio corsi (split stringa)
+        all_courses = []
+
+        for row in df["Courses"]:
+            all_courses.extend([c.strip() for c in row.split(",")])
+
+        counts = pd.Series(all_courses).value_counts()
+
+        st.bar_chart(counts)
+
+    else:
+        st.write("No data yet")
+
+elif password:
+    st.warning("Wrong password")
