@@ -487,15 +487,15 @@ courses:
       relevant challenges in practical applications, including considerations such as 2D versus 3D schematization, initial and boundary conditions, staged construction, 
       and soil-structure problems, illustrated with practical examples.
     program: |
-      A review of finite element theory for linear and non-linear materials
+      Lecture 1: A review of finite element theory for linear and non-linear materials
       
-      Pore pressure calculation, seepage and consolidation
+      Lecture 2: Pore pressure calculation, seepage and consolidation
       
-      Numerical implementation of soil constitutive laws 
+      Lecture 3: Numerical implementation of soil constitutive laws 
       
-      Seismic geotechnical problems
+      Lecture 4: Seismic geotechnical problems
       
-      Relevant issues in practical applications
+      Lecture 5: Relevant issues in practical applications
 
   - id: B10
     name: "Soil Structure Interaction"
