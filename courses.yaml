@@ -282,6 +282,29 @@ courses:
     phase: B
     sector: "Mechanics of Solids and Structures"
     years: [2026]
+    professor: "Antonino Favata"
+    description: |
+      This course offers a reasonably self-contained introduction to continuum mechanics and thermodynamics, that emphasizes the foundational role of the balance laws and the entropy inequality. These principles---along with the requirement that physical theories be frame-indifferent---serve as the essential building blocks for the formulation of theories of material behavior.
+      A central part of the course is devoted to the general theory of constitutive equations, emphasizing the use of thermodynamic principles to constrain constitutive behavior. This will be developed within the framework commonly referred to as the Coleman–Noll procedure. As applications of this general framework, I will present the following topics: rigid heat conductors, elastic solids under isothermal and nonisothermal conditions. If time permits, the course will also touch upon basic aspects of rate-independent plasticity.
+      Prerequisites are basic notions on calculus and  mechanics. Few nonstandard mathematical tools will be introduced with care, if necessary.
+    program: |
+      1. *Kinematics*
+      
+      Motion of a body. Deformation gradient. Homogeneous deformations. Rigid deformations. Strain measures. Polar decomposition. Change in  length, volume, and area. Motion velocity, velocity gradient, stretching, and spin. Infinitesimal theory.
+
+      2. *Basic Mechanical Principles.*
+      
+      Balance of mass. Force and moments. Stress. Balance laws for linear and angular momentum. Frame of reference. Frame-indifference principle. Material symmetries.
+      Referential forms for the mechanical laws: Piola stress, expended power, second Piola stress. 
+
+      3. *Basic Thermodynamical Principles*
+      
+      The first law: balance of energy. The second law: non-negative production of entropy.  Basic hypotheses for developing physically meaningful constitutive theories: constitutive response functions, frame indifference and compatibility with thermodynamics, Coleman-Noll procedure.
+
+      4. *Constitutive theory*
+      
+      Elastic materials. Dissipative phenomena. Rigid heat conductors, thermoelasticity. Rate-independent plasticity.
+    
 
   - id: B4
     name: "Advanced Finite Element Methods"
