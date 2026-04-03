@@ -52,9 +52,8 @@ sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet
 st.title("PhD Program in Structural and Geotechnical Engineering")
 
 # ======================
-# ADMIN LOGIN
+# ADMIN LOG
 # ======================
-‎
 import streamlit as st
 admin_password = st.secrets.get("ADMIN_PASSWORD", "")
 
