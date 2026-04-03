@@ -502,6 +502,15 @@ courses:
     phase: B
     sector: "Geotechnical Engineering"
     years: [2026]
+    professor: "Luigi Callisto"
+    program: |
+      - Static soil-structure interaction for shallow and deep foundations
+      - Static soil-structure interaction for earth retaining structures and tunnels
+      - Effects induced by excavation in existing constructions
+      - Seismic actions and ground response analysis
+      - Soil-structure interaction for seismic loads: linear analysis
+      - Soil-structure interaction for seismic loads: nonlinear analysis
+      - Soil-structure interaction for seismic loads: retaining structures and tunnels
 
   - id: B11
     name: "Special Topics in Geotechnical Engineering"
