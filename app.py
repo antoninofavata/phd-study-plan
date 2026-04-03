@@ -60,6 +60,10 @@ password = st.sidebar.text_input("Password", type="password")
 
 admin_password = st.secrets.get("ADMIN_PASSWORD", None)
 
+# 👇 DEBUG QUI
+st.sidebar.write("Inserita:", repr(password))
+st.sidebar.write("Salvata:", repr(admin_password))
+
 admin_mode = False
 
 if admin_password is not None and password == admin_password:
