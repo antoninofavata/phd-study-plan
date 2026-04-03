@@ -213,7 +213,15 @@ courses:
     name: "Functional Analysis and Variational Methods for Engineering Applications"
     phase: A
     years: [2026]
-
+    description: |
+      The course introduces the fundamentals of functional analysis and operator theory, with emphasis on weak formulations of partial differential equations.
+      Key topics include well-posedness, variational principles, and the mathematical foundations of existence and uniqueness of solutions.
+      
+      A strong focus is placed on engineering applications, highlighting how variational methods provide a powerful framework for modeling and solving complex 
+      problems beyond the reach of classical approaches. The course may also include an introduction to homogenization and multiscale techniques for the 
+      analysis of heterogeneous systems and their connection to macroscopic modeling. It further explores the link with numerical methods, in particular the finite element 
+      method, showing how these tools are essential for the simulation and solution of real-world engineering problems.
+  
 
   # ======================
   # FASE B - Mechanics of Solids and Structures
