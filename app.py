@@ -74,9 +74,6 @@ if password:
 
 admin_mode = st.session_state.admin_mode
 
-st.sidebar.write("Inserita:", repr(password))
-st.sidebar.write("Salvata:", repr(admin_password))
-st.sidebar.write("Admin mode:", admin_mode)
 
 # ======================
 # COURSE CATALOGUE
