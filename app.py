@@ -12,15 +12,6 @@ import json
 import pandas as pd
 from google.oauth2.service_account import Credentials
 
-# ======================
-# CONFIG
-# ======================
-
-st.set_page_config(
-    page_title="PhD Program in Structural and Geotechnical Engineering",
-    layout="wide",
-    initial_sidebar_state="collapsed"
-)
 
 # ======================
 # CONNECT GOOGLE SHEETS
