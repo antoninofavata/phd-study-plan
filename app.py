@@ -140,13 +140,12 @@ if st.button("Submit Study Plan"):
             client = connect()
             sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
 
-            courses_str = ", ".join(selected_courses)
-
-            sheet.append_row([
-                name,
-                cycle,
-                courses_str
-            ])
+            for course in selected_courses:
+    sheet.append_row([
+        name,
+        cycle,
+        course
+    ])
 
             st.success("Study plan submitted and saved!")
 
