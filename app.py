@@ -68,7 +68,7 @@ if password:
 admin_mode = st.session_state.admin_mode
 
 
-st.sidebar.write("Admin mode:", admin_mode)
+
 
 
 # ======================
