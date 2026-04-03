@@ -1,6 +1,4 @@
-
 import streamlit as st
-
 
 st.set_page_config(
     page_title="PhD Program in Structural and Geotechnical Engineering",
@@ -10,10 +8,8 @@ st.set_page_config(
 
 import yaml
 import gspread
-import json
 import pandas as pd
 from google.oauth2.service_account import Credentials
-
 
 # ======================
 # CONNECT GOOGLE SHEETS
@@ -40,11 +36,13 @@ with open("courses.yaml", "r") as f:
     courses = yaml.safe_load(f)["courses"]
 
 # ======================
-# LOAD GOOGLE SHEET
+# GOOGLE SHEETS
 # ======================
 
 client = connect()
-sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet1
+sheet = client.open_by_key(
+    "1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM"
+).sheet1
 
 # ======================
 # TITLE
@@ -53,23 +51,20 @@ sheet = client.open_by_key("1BTHZsKMHjSBDO6hC2eZwOmV_2WlLYY_Unujhco-zdwM").sheet
 st.title("PhD Program in Structural and Geotechnical Engineering")
 
 # ======================
-# ADMIN LOG
+# ADMIN LOGIN
 # ======================
-import streamlit as st
+
 admin_password = st.secrets["app"]["ADMIN_PASSWORD"]
 
 password = st.sidebar.text_input("Password", type="password")
 
-admin_mode = (password == admin_password)
 if "admin_mode" not in st.session_state:
     st.session_state.admin_mode = False
+
 if password:
     st.session_state.admin_mode = (password == admin_password)
+
 admin_mode = st.session_state.admin_mode
-
-
-
-
 
 # ======================
 # COURSE CATALOGUE
@@ -88,17 +83,14 @@ for c in courses:
         years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
 
         with st.expander(c["name"]):
-
-            st.markdown(f" **Available in:** {years_str}")
+            st.markdown(f"**Available in:** {years_str}")
 
             if "professor" in c:
                 st.markdown(f"**Professor:** {c['professor']}")
 
             if "description" in c:
                 st.markdown("**Description**")
-                st.markdown(c["description"])
-
-            
+                st.write(c["description"])
 
             st.markdown("---")
 
@@ -108,7 +100,9 @@ for c in courses:
 
 st.subheader("Phase B")
 
-sectors = sorted(set(c.get("sector", "") for c in courses if c["phase"] == "B"))
+sectors = sorted(
+    set(c.get("sector", "") for c in courses if c["phase"] == "B")
+)
 
 for s in sectors:
     st.markdown(f"### {s}")
@@ -119,11 +113,10 @@ for s in sectors:
             years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
 
             with st.expander(c["name"]):
-
-                st.markdown(f" **Available in:** {years_str}")
+                st.markdown(f"**Available in:** {years_str}")
 
                 if "description" in c:
-                    st.markdown("** Description**")
+                    st.markdown("**Description**")
                     st.write(c["description"])
 
                 st.markdown("---")
@@ -141,7 +134,7 @@ st.markdown("""
 """)
 
 # ======================
-# STUDENT INFO
+# STUDENT FORM
 # ======================
 
 st.header("Create your Study Plan")
@@ -190,7 +183,6 @@ if st.button("Submit Study Plan"):
         st.error("Please select at least one course.")
 
     else:
-        # salva su Google Sheets
         sheet.append_row([
             name,
             cycle,
@@ -212,21 +204,49 @@ if admin_mode:
 
     st.header("📊 Admin Dashboard")
 
-    if not df.empty:
-
-        st.subheader("Students per course")
-
-        # conta iscritti per corso
-        course_counts = {}
-
-        for row in df["course"]:
-            courses_list = [c.strip() for c in row.split(",")]
-
-            for c in courses_list:
-                course_counts[c] = course_counts.get(c, 0) + 1
-
-        for course, count in course_counts.items():
-            st.write(f"- {course}: {count}")
+    if df.empty:
+        st.write("No data yet")
 
     else:
-        st.write("No data yet")
+
+        # ======================
+        # STUDENTS → COURSES
+        # ======================
+        st.subheader("👨‍🎓 Students and their courses")
+
+        if "student" in df.columns and "course" in df.columns:
+
+            for _, row in df.iterrows():
+                student = row["student"]
+                courses_raw = row["course"]
+
+                courses_list = [
+                    c.strip() for c in str(courses_raw).split(",") if c.strip()
+                ]
+
+                with st.expander(student):
+                    for c in courses_list:
+                        st.write(f"- {c}")
+
+        # ======================
+        # COURSE COUNTS
+        # ======================
+        st.subheader("📊 Students per course")
+
+        if "course" in df.columns:
+
+            course_counts = {}
+
+            for row in df["course"]:
+                courses_list = [
+                    c.strip() for c in str(row).split(",") if c.strip()
+                ]
+
+                for c in courses_list:
+                    course_counts[c] = course_counts.get(c, 0) + 1
+
+            for course, count in sorted(course_counts.items()):
+                st.write(f"- {course}: {count}")
+
+        else:
+            st.warning("Column 'course' not found")
