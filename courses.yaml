@@ -54,6 +54,7 @@ courses:
         - Weibull distribution
         - distributions for extreme events
         Applications to modeling material strength, soil mechanical properties, and environmental loads.
+        
         *2. Statistical dependence and uncertainty propagation* (4 hours)
         
         - random vectors and dependence between variables
@@ -65,6 +66,7 @@ courses:
         - first-order approximations
         - error propagation
         Applications to the combination of structural loads and correlated geotechnical parameters.
+        
         *3. Elements of structural and geotechnical reliability* (4 hours)
         
         - limit state functions
@@ -74,6 +76,7 @@ courses:
         - First Order Second Moment method (FOSM)
         - introduction to First Order Reliability Method (FORM)
         Applications to structural safety assessment and slope stability analysis.
+        
         *4. Statistical analysis of experimental data* (4 hours)
         
         - samples and sample statistics
@@ -83,6 +86,7 @@ courses:
         - confidence intervals
         Applications to statistical analysis of laboratory tests on materials and estimation of the vari-
         ability of soil properties.
+        
         *5. Statistical tests and empirical models* (4 hours)
         
         - hypothesis testing
