@@ -214,7 +214,7 @@ if admin_mode:
         # ======================
         st.subheader("👨‍🎓 Students and their courses")
 
-            if "name" in df.columns and "course" in df.columns:
+        if "name" in df.columns and "course" in df.columns:
     
             for _, row in df.iterrows():
             student = row["name"]  # <-- FIX
