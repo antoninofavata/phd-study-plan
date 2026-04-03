@@ -8,16 +8,24 @@ courses:
     name: "Scientific Computing and Python Programming"
     phase: A
     years: [2025]
-    description: | 
-      Programming fundamentals  
-      Decision structures  
-      Iteration  
-      Data structures  
-      Functions  
-      Data management  
-      Applications (OpenSees)  
-      Introduction to Machine Learning  
-      Generative AI
+    description: |
+        The course provides the fundamentals of programming in Python, with particular attention to:
+        - Development of computational thinking
+        - Data modeling and management
+        - Structuring complex scripts
+        - Introduction to the fundamental principles of Artificial Intelligence
+        
+        Advanced topics such as object-oriented programming, complex data structures, or the mathematical formalisms of machine learning are not covered.
+    program: | 
+      Lesson 1: Fundamentals of Programming
+      Lesson 2: Expressions, logic, and decision structures
+      Lesson 3: Iteration and computational patterns
+      Lesson 4: Data structures and vector computation
+      Lesson 5: Function definition
+      Lesson 6: Data import and visualization
+      Lesson 7: Data processing and complex programs
+      Lesson 8: Practical exercise (OpenSees)
+      Lessons 9–10: Introduction to Machine Learning with Python; generative AI and programming support
   
     professor: "Alba Bisante"
     
