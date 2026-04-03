@@ -58,7 +58,14 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 
 st.sidebar.header("Admin")
 
-admin_mode = st.sidebar.checkbox("Enable admin mode")
+st.sidebar.header("Admin")
+
+password = st.sidebar.text_input("Password", type="password")
+
+admin_mode = False
+
+if password == st.secrets.get("ADMIN_PASSWORD", ""):
+    admin_mode = True
 
 # ======================
 # COURSE CATALOGUE
