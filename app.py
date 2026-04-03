@@ -184,7 +184,7 @@ if password == ADMIN_PASSWORD:
 
         all_courses = []
 
-        for row in df["Courses"]:
+        for row in df["course"]:
             all_courses.extend([c.strip() for c in row.split(",")])
 
         counts = pd.Series(all_courses).value_counts()
