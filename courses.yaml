@@ -430,6 +430,47 @@ courses:
       
       Finally, the above approach is generalised and applied to the development of a micro-informed thermodynamics-based constitutive framework. 
       This is then adopted for the formulation of an innovative model accounting of double porosity and fabric of fine-grained soils.
+    
+    program: |
+      *The soil as a two-phase continuum medium*
+
+      Principle of effective stress. Solid-fluid compatibility. Elements of soil hydraulics. Field equations for a deformable porous medium under static conditions; 
+      special cases: dry soil, saturated soil with water flow under stationary or transient conditions, undrained conditions, consolidation. Field equations under dynamic conditions.
+      
+      *Experimental observations*
+      
+      Laboratory equipment. Typical experimental observations on reconstituted clays: radial paths, deviatoric paths. 
+      Dependence on the current stress state and stress history: contracting or dilating response. Critical state. Normalisation, state boundary surface and their mechanical interpretation. 
+      Effects of anisotropic radial compression: experimental observations and their mechanical interpretation; relationship between macro and micro scales via 
+      scanning electron microscope observations. Effects of bonding between grain aggregates on the mechanical behaviour of natural clays: experimental observations and their mechanical interpretation.
+      The behaviour of clays for states far from failure: initial shear stiffness and non-linear dependence of stiffness on the amplitude of the stress/strain perturbation. 
+      Experimental observations of the initial shear stiffness: dependence on the effective stress state, dependence on previous stress history, anisotropy.
+      
+      *Elements of plasticity theory*
+      
+      Elements of phenomenological one-dimensional elasto-plasticity: experimental evidence, reversibility, yielding, loading-unloading conditions, perfect plasticity, hardening.
+      Elements of phenomenological multidimensional elasto-plasticity: experimental evidence, elastic domain, yielding, plastic flow, loading-unloading conditions. 
+      Direct and inverse formulation of perfect plasticity. Isotropic hardening, kinematic hardening, anisotropic hardening. Direct and inverse formulation of hardening plasticity.
+      
+      *Plasticity-based constitutive modelling of soils*
+      
+      Hypo-elasticity and hyper-elasticity. The soil as an elastic-perfectly plastic medium. Simple elastoplastic models with isotropic hardening: 
+      Modified Cam-Clay (MCC) and its evolutions. Cementation and mechanical debonding processes: 
+      ad hoc isotropic hardening laws. Anisotropic strain history described by tensorial variables: kinematic and anisotropic hardening, mixed hardening. 
+      Multi-surface hardening plasticity models.
+      
+      *Constitutive modelling based on thermodynamics with internal variables*
+      
+      Motivations. Energy and its rate under isothermal conditions. 1st Law. Legendre transform. 2nd Law. Rate of dissipation. 
+      Yield functions in the generalised and Cauchy stress spaces. MCC with linear and non-linear elasticity. 
+      Isotropic coupling: MCC reformulation and consequences. Anisotropic hardening: Saniclay-T. Beyond Saniclay-T: anisotropic coupling.
+      
+      *Micro-informed constitutive modelling of clays based on thermodynamics*
+      
+      Motivations. Micro-macro experimental evidences: the role of clusters of particles and related porosities and fabrics. 
+      Relevant observable internal variables for clays. A double porosity and fabric framework for fine-grained soils: thermodynamics framework; energy and rate of dissipation functions; 
+      equivalent single-surface hardening plasticity model; calibration of model parameters and initialisation of internal variables; validation against multiscale experimental results. 
+      Final remarks. 
 
   - id: B9
     name: "Numerical Modelling in Geomechanics"
