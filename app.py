@@ -57,7 +57,7 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 
 import streamlit as st
 
-admin_password = st.secrets.get("ADMIN_PASSWORD", "")
+admin_password = st.secrets["app"]["ADMIN_PASSWORD"]
 
 password = st.sidebar.text_input("Password", type="password")
 
