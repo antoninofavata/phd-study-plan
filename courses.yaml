@@ -208,6 +208,43 @@ courses:
       complex problems in solid and structural mechanics. Starting from the foundations of functional analysis, 
       the program will explore how variational methods make it possible to extend the search for solutions to problems 
       that do not admit a classical treatment, with particular attention to nonlinear phenomena such as damage and plasticity.
+    program: |
+    
+      1. *Introduction to Variational Methods*
+      
+      - Limitations of the classical formulation of partial differential equations (PDEs).
+      - Why variational methods? Extension of the concept of solution and weak formulations.
+      
+      2. *Formulation of the Classical Elasticity Problem*
+      
+      - Review of continuum mechanics.
+      - Total potential energy and the principle of virtual work.
+      - Variational formulation of the linear elastic problem.
+      
+      3. *Functional Spaces and Distribution Theory*
+      
+      - Normed vector spaces and completeness: Banach and Hilbert spaces.
+      - Sobolev spaces; embedding and trace theorems.
+      
+      4. *Variational Inequalities: Damage and Plasticity*
+      
+      - Constrained minimization problems and convexity.
+      - Introduction to variational inequalities.
+      - Applications to nonlinear mechanics: damage and material plasticity models.
+      
+      5. *Numerical Methods and Well-Posedness Analysis*
+      
+      - Existence and uniqueness of the solution.
+      - The concept of coercivity and continuity in an engineering context.
+      - Galerkin approximation and mathematical foundations of the Finite Element Method.
+      
+      6. *Locking Phenomena and Mixed Methods*
+      
+      - Analysis of the numerical “locking” problem.
+      - Introduction to mixed variational methods. Stability conditions (Inf-Sup).
+
+
+    
 
 
   - id: B2
