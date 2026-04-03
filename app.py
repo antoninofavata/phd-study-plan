@@ -254,13 +254,12 @@ course_counts = {}
 
 if "course" in df.columns:
 
-    for row in df["course"]:
+    course_counts = {}
 
-        # salta celle vuote
+    for row in df["course"]:
         if pd.isna(row):
             continue
 
-        # converti sempre in stringa e separa
         courses_list = [
             c.strip() for c in str(row).split(",") if c.strip()
         ]
