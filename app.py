@@ -84,6 +84,9 @@ for c in courses:
                 st.markdown("**📝 Description**")
                 st.write(c["description"])
 
+            if "professor" in c:
+                st.write(f"Professor: {c['professor']}")
+
             st.markdown("---")
 
 # ----------------------
