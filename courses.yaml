@@ -258,6 +258,21 @@ courses:
         the characterization of the constitutive behavior of a structure, and the actions acting upon it.
         Paradigmatic structural models will be introduced to discuss the main dynamic phenomena that arise in both linear and nonlinear regimes. 
         Applications will also be presented, with reference to case studies implemented in software capable of performing symbolic analysis.
+    program: |
+      *Introduction*
+      The dynamic model of a structure: kinematic parameters describing motion; rheological models representing the constitutive behavior of structures; actions acting on structures. Linear and nonlinear structural models; equations of motion.
+      *Linear Dynamics*
+      Harmonic motion. Free dynamics of the “simple harmonic oscillator.” Effect of damping on the free dynamic response of the “simple oscillator.” State-space representation of the equations of motion. Dynamic stability of a mechanical system.
+      Forced dynamics: direct resonance in harmonically excited systems. Resonance in parametrically excited systems.
+      Multiple-degree-of-freedom (MDoF) systems. Modal analysis and its applications in linear dynamic systems through the modal expansion theorem.
+      Harmonic excitation in multiple-degree-of-freedom systems and the concept of passive vibration control.
+      Indirect actions: the case of earthquakes; analysis using the response spectrum.
+  
+      *Nonlinear Dynamics*
+  
+      The Duffing oscillator. Methods for solving nonlinear equations of motion (with particular attention to the method of multiple scales). Nonlinear normal modes. Effect of damping in nonlinear systems. Direct resonance in harmonically excited systems. Resonance in parametrically excited systems. The Van der Pol oscillator and the case of nonlinear damping.
+      Multiple-degree-of-freedom systems: effects of nonlinearities in the case of internal resonances.
+
 
   - id: B3
     name: "Continuum Mechanics and Thermodynamics"
