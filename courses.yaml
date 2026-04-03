@@ -29,13 +29,13 @@ courses:
     professor: "Claudio Durastanti - Anna Vidotto"
     description: | 
       Structural and geotechnical systems are affected by several sources of uncertainty, including the
-    variability of material and soil properties, uncertainty in loads, and modeling errors.
-    The aim of this course is to introduce the main tools of probability and applied statistics for:
-    - modeling the variability of engineering parameters
-    - analyzing experimental data from laboratory and in situ tests
-    - quantifying uncertainty in engineering predictions
-    - introducing the fundamental concepts of structural and geotechnical reliability
-    Particular emphasis is placed on applications in civil engineering.
+      variability of material and soil properties, uncertainty in loads, and modeling errors.
+      The aim of this course is to introduce the main tools of probability and applied statistics for:
+      - modeling the variability of engineering parameters
+      - analyzing experimental data from laboratory and in situ tests
+      - quantifying uncertainty in engineering predictions
+      - introducing the fundamental concepts of structural and geotechnical reliability
+      Particular emphasis is placed on applications in civil engineering.
 
   - id: A3
     name: "Time Series Analysis and Data-driven Modeling"
