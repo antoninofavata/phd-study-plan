@@ -189,7 +189,12 @@ if password == ADMIN_PASSWORD:
 
         counts = pd.Series(all_courses).value_counts()
 
-        st.bar_chart(counts)
+       st.write("### Students per course")
+
+df_counts = counts.reset_index()
+df_counts.columns = ["Course", "Number of students"]
+
+st.table(df_counts)
 
     else:
         st.write("No data yet")
