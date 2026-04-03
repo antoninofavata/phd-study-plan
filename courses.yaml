@@ -37,7 +37,7 @@ courses:
       - introducing the fundamental concepts of structural and geotechnical reliability
       Particular emphasis is placed on applications in civil engineering.
     program: |
-        1. Probabilistic modeling of uncertainty in engineering systems (4 hours)
+       * 1. Probabilistic modeling of uncertainty in engineering systems* (4 hours)
         Sources of uncertainty in civil engineering problems:
         - variability of material properties
         - variability of geotechnical parameters
