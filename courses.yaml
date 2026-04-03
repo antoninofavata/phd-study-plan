@@ -30,10 +30,10 @@ courses:
     description: | 
       I sistemi strutturali e geotecnici sono caratterizzati da molteplici fonti di incertezza, tra cui la variabilità delle proprietà dei materiali e del suolo, l’incertezza nei carichi e nei modelli matematici.
       Il corso introduce i principali strumenti di probabilità e statistica applicata per:
-      • modellare la variabilità dei parametri ingegneristici
-      • analizzare dati sperimentali provenienti da prove di laboratorio e in situ
-      • quantificare l’incertezza nelle previsioni dei modelli
-      • introdurre i concetti fondamentali di affidabilità strutturale e geotecnica
+        • modellare la variabilità dei parametri ingegneristici
+        • analizzare dati sperimentali provenienti da prove di laboratorio e in situ
+        • quantificare l’incertezza nelle previsioni dei modelli
+        • introdurre i concetti fondamentali di affidabilità strutturale e geotecnica
       Particolare attenzione è dedicata alle applicazioni nell’ingegneria civile.
 
   - id: A3
