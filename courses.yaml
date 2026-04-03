@@ -9,15 +9,15 @@ courses:
     phase: A
     years: [2025]
     description: | 
-    Fondamenti di programmazione
-    Strutture decisionali
-    Iterazione
-    Strutture dati
-    Funzioni
-    Gestione dati
-    Applicazioni (OpenSees)
-    Introduzione al Machine Learning
-    AI generativa
+      Fondamenti di programmazione
+      Strutture decisionali
+      Iterazione
+      Strutture dati
+      Funzioni
+      Gestione dati
+      Applicazioni (OpenSees)
+      Introduzione al Machine Learning
+      AI generativa
     professor: "Alba Bisante"
     
 
