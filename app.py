@@ -122,8 +122,7 @@ for s in sectors:
                 st.markdown(f"**Available in:** {years_str}")
 
                 if "professor" in c:
-                    st.markdown("**Professor**")
-                    st.markdown(c["professor"])
+                    st.markdown(f"**Professor:** {c['professor']}")
 
                 if "description" in c:
                     st.markdown("**Description**")
