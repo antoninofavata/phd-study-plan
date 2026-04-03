@@ -26,6 +26,7 @@ courses:
     name: "Probability Theory and Statistics"
     phase: A
     years: [2025]
+    professor: "Claudio Durastanti - Anna Vidotto"
 
   - id: A3
     name: "Time Series Analysis and Data-driven Modeling"
