@@ -213,15 +213,19 @@ if admin_mode:
 
 st.subheader("Students and their courses")
 
-# controllo colonne disponibili
-if df is not None and not df.empty and "name" in df.columns and "course" in df.columns:
+if df.empty:
+    st.write("No data available")
+
+elif "name" not in df.columns or "course" not in df.columns:
+    st.warning("Required columns not found")
+
+else:
 
     student_courses = {}
 
     for _, row in df.iterrows():
 
         student = row.get("name")
-
         courses_raw = row.get("course")
 
         if pd.isna(student) or pd.isna(courses_raw):
@@ -231,14 +235,11 @@ if df is not None and not df.empty and "name" in df.columns and "course" in df.c
             c.strip() for c in str(courses_raw).split(",") if c.strip()
         ]
 
-        if student not in student_courses:
-            student_courses[student] = []
-
-        student_courses[student].extend(courses_list)
+        student_courses.setdefault(student, []).extend(courses_list)
 
     if student_courses:
 
-        for student in sorted(student_courses.keys()):
+        for student in sorted(student_courses):
 
             courses = sorted(set(student_courses[student]))
 
@@ -248,9 +249,6 @@ if df is not None and not df.empty and "name" in df.columns and "course" in df.c
 
     else:
         st.write("No data available")
-
-else:
-    st.warning("Required columns not found")
 
 # ======================
 # COURSE COUNTS
