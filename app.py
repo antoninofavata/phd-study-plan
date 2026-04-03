@@ -183,23 +183,12 @@ if st.button("Submit Study Plan"):
         st.error("Please select at least one course.")
 
     else:
-        if st.button("Submit Study Plan"):
-
-    if not name or not cycle:
-        st.error("Please fill in all required fields.")
-
-    elif not selected_courses:
-        st.error("Please select at least one course.")
-
-    else:
         for course in selected_courses:
             sheet.append_row([
                 name,
                 cycle,
                 course
             ])
-
-        st.success("Study plan submitted successfully!")
 
         st.success("Study plan submitted successfully!")
 
