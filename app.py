@@ -244,23 +244,23 @@ if admin_mode:
 # COURSE COUNTS
 # ======================
 
-st.subheader("Students per course")
-
-course_counts = {}
-
-if admin_mode and "course" in df.columns:
-
-    for row in df["course"]:
-
-        if pd.isna(row):
-            continue
-
-        courses_list = [
-            c.strip() for c in str(row).split(",") if c.strip()
-        ]
-
-        for c in courses_list:
-            course_counts[c] = course_counts.get(c, 0) + 1
-
-    for course, count in sorted(course_counts.items()):
-        st.write(f"- {course}: {count}")
+            st.subheader("Students per course")
+            
+            course_counts = {}
+            
+            if admin_mode and "course" in df.columns:
+            
+                for row in df["course"]:
+            
+                    if pd.isna(row):
+                        continue
+            
+                    courses_list = [
+                        c.strip() for c in str(row).split(",") if c.strip()
+                    ]
+            
+                    for c in courses_list:
+                        course_counts[c] = course_counts.get(c, 0) + 1
+            
+                for course, count in sorted(course_counts.items()):
+                    st.write(f"- {course}: {count}")
