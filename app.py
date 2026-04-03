@@ -10,7 +10,7 @@ from google.oauth2.service_account import Credentials
 # ======================
 
 st.set_page_config(
-    page_title="PhD Study Plan",
+    page_title="PhD Program in Structural and Geotechnical Engineering",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
