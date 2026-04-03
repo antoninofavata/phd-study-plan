@@ -251,6 +251,13 @@ courses:
     phase: B
     sector: "Mechanics of Solids and Structures"
     years: [2025]
+    professor: "Andrea Arena"
+    description: |
+        The course aims to provide the fundamental knowledge needed to understand the linear and nonlinear dynamic behavior of structures. 
+        The introduction will focus on the modeling of dynamic systems, including the identification of kinematic descriptors of motion, 
+        the characterization of the constitutive behavior of a structure, and the actions acting upon it.
+        Paradigmatic structural models will be introduced to discuss the main dynamic phenomena that arise in both linear and nonlinear regimes. 
+        Applications will also be presented, with reference to case studies implemented in software capable of performing symbolic analysis.
 
   - id: B3
     name: "Continuum Mechanics and Thermodynamics"
