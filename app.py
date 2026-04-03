@@ -244,25 +244,35 @@ if admin_mode:
                     for c in courses_list:
                         st.write(f"- {c}")
 
-        # ======================
-        # COURSE COUNTS
-        # ======================
-        st.subheader("📊 Students per course")
+       # ======================
+# COURSE COUNTS
+# ======================
 
-        if "course" in df.columns:
+st.subheader("📊 Students per course")
 
-            course_counts = {}
+course_counts = {}
 
-            for row in df["course"]:
-                courses_list = [
-                    c.strip() for c in str(row).split(",") if c.strip()
-                ]
+if "course" in df.columns:
 
-                for c in courses_list:
-                    course_counts[c] = course_counts.get(c, 0) + 1
+    for row in df["course"]:
 
-            for course, count in sorted(course_counts.items()):
-                st.write(f"- {course}: {count}")
+        # salta celle vuote
+        if pd.isna(row):
+            continue
 
-        else:
-            st.warning("Column 'course' not found")
+        # converti sempre in stringa e separa
+        courses_list = [
+            c.strip() for c in str(row).split(",") if c.strip()
+        ]
+
+        for c in courses_list:
+            course_counts[c] = course_counts.get(c, 0) + 1
+
+    if course_counts:
+        for course, count in sorted(course_counts.items()):
+            st.write(f"- {course}: {count}")
+    else:
+        st.write("No courses found")
+
+else:
+    st.warning("Column 'course' not found")
