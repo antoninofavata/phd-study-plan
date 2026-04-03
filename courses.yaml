@@ -10,14 +10,14 @@ courses:
     years: [2025]
     description: | 
     Fondamenti di programmazione
-Strutture decisionali
-Iterazione
-Strutture dati
-Funzioni
-Gestione dati
-Applicazioni (OpenSees)
-Introduzione al Machine Learning
-AI generativa
+    Strutture decisionali
+    Iterazione
+    Strutture dati
+    Funzioni
+    Gestione dati
+    Applicazioni (OpenSees)
+    Introduzione al Machine Learning
+    AI generativa
     professor: "Alba Bisante"
     
 
