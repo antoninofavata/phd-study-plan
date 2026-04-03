@@ -53,7 +53,7 @@ courses:
   # ======================
 
   - id: B1
-    name: "Variational methods for solid mechanics: elasticity, plasticity and damage"
+    name: "Variational methods for solid mechanics: elasticity plasticity and damage"
     phase: B
     sector: "Mechanics of Solids and Structures"
     years: [2025]
