@@ -207,24 +207,24 @@ if admin_mode:
     if df.empty:
         st.write("No data yet")
 
-
-     # ======================
+# ======================
 # STUDENTS → COURSES
 # ======================
 
 st.subheader("Students and their courses")
 
-if "name" in df.columns and "course" in df.columns:
+# controllo colonne disponibili
+if df is not None and not df.empty and "name" in df.columns and "course" in df.columns:
 
-    # raggruppa i corsi per studente
     student_courses = {}
 
     for _, row in df.iterrows():
 
-        student = row["name"]
-        courses_raw = row["course"]
+        student = row.get("name")
 
-        if pd.isna(courses_raw):
+        courses_raw = row.get("course")
+
+        if pd.isna(student) or pd.isna(courses_raw):
             continue
 
         courses_list = [
@@ -236,20 +236,21 @@ if "name" in df.columns and "course" in df.columns:
 
         student_courses[student].extend(courses_list)
 
-    # mostra una sola volta per studente
-    for student, courses in student_courses.items():
+    if student_courses:
 
-        # elimina duplicati (se presenti)
-        courses = sorted(set(courses))
+        for student in sorted(student_courses.keys()):
 
-        with st.expander(student):
-            for c in courses:
-                st.write(f"- {c}")
+            courses = sorted(set(student_courses[student]))
+
+            with st.expander(student):
+                for c in courses:
+                    st.write(f"- {c}")
+
+    else:
+        st.write("No data available")
 
 else:
-    st.warning("Required columns not found")      
-
-
+    st.warning("Required columns not found")
 
 # ======================
 # COURSE COUNTS
