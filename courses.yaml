@@ -8,6 +8,10 @@ courses:
     name: "Scientific Computing and Python Programming"
     phase: A
     years: [2025]
+    description: "Introduction to elasticity and structural behavior."
+    credits: 6
+    professor: "Prof. Rossi"
+    room: "Aula 3"
 
   - id: A2
     name: "Probability Theory and Statistics"
