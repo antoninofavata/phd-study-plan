@@ -130,16 +130,16 @@ courses:
       - MDOF modal transfer matrix, dynamic amplification factor, transmissibility, FRF types
       - Input–output PSD relationship and connection to output-only identification
       
-      *Lecture 3 — Sampling, Discrete-Time Systems, and the z-Transform* (3 h)
+      *Lecture 3 — Sampling, Discrete-Time Systems, and the $z$-Transform* (3 h)
       
       - Shannon–Nyquist sampling theorem, aliasing, anti-aliasing filters
       - ADC resolution, quantisation noise, sigma-delta oversampling
       - Multi-sensor synchronisation; sampling-rate selection for SHM
       - Discrete-time convolution, resampling, decimation
       - $z$-transform: definition, ROC, inverse via partial fractions
-      - Difference equations, discrete transfer function H(z)
+      - Difference equations, discrete transfer function $H(z)$
       - Poles, zeros, and the unit circle; stability criterion
-      - Bilinear transform, frequency warping, frequency response from H(z)
+      - Bilinear transform, frequency warping, frequency response from $H(z)$
       - AR and ARMA models for structural identification; model-order selection
       
       *Lecture 4 — Digital Filtering, Feature Engineering, and Output-Only Identification* (3 h)
