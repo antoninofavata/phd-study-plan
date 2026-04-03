@@ -55,22 +55,16 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 # ADMIN LOGIN
 # ======================
 
-import streamlit as st
-
 admin_password = st.secrets["app"]["ADMIN_PASSWORD"]
 
 password = st.sidebar.text_input("Password", type="password")
 
-# inizializzazione
 if "admin_mode" not in st.session_state:
     st.session_state.admin_mode = False
 
-# controllo password
 if password:
     if password == admin_password:
         st.session_state.admin_mode = True
-    else:
-        st.session_state.admin_mode = False
 
 admin_mode = st.session_state.admin_mode
 
