@@ -96,7 +96,7 @@ for c in courses:
                 st.markdown("**Program**")
                 st.markdown(c["program"])
 
-            st.markdown("---")
+          #  st.markdown("---")
 
 # ----------------------
 # PHASE B
