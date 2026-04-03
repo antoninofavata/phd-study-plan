@@ -36,6 +36,60 @@ courses:
       - quantifying uncertainty in engineering predictions
       - introducing the fundamental concepts of structural and geotechnical reliability
       Particular emphasis is placed on applications in civil engineering.
+    program:
+      1. Probabilistic modeling of uncertainty in engineering systems (4 hours)
+      Sources of uncertainty in civil engineering problems:
+      - variability of material properties
+      - variability of geotechnical parameters
+      - uncertainty in environmental loads
+      - modeling uncertainty
+      Basic concepts of probability:
+      - random variables
+      - probability distributions
+      - statistical moments
+      Probability distributions commonly used in civil engineering:
+      - normal distribution
+      - lognormal distribution
+      - Weibull distribution
+      - distributions for extreme events
+      Applications to modeling material strength, soil mechanical properties, and environmental loads.
+      2. Statistical dependence and uncertainty propagation (4 hours)
+      - random vectors and dependence between variables
+      - covariance and correlation
+      - covariance matrices
+      - multivariate normal distribution
+      Uncertainty propagation in engineering models:
+      - linear combinations of random variables
+      - first-order approximations
+      - error propagation
+      Applications to the combination of structural loads and correlated geotechnical parameters.
+      3. Elements of structural and geotechnical reliability (4 hours)
+      - limit state functions
+      - probability of failure
+      - reliability index
+      Basic reliability methods:
+      - First Order Second Moment method (FOSM)
+      - introduction to First Order Reliability Method (FORM)
+      Applications to structural safety assessment and slope stability analysis.
+      4. Statistical analysis of experimental data (4 hours)
+      - samples and sample statistics
+      - parameter estimation
+      - method of moments
+      - maximum likelihood estimation
+      - confidence intervals
+      Applications to statistical analysis of laboratory tests on materials and estimation of the vari-
+      ability of soil properties.
+      5. Statistical tests and empirical models (4 hours)
+      - hypothesis testing
+      - t-tests
+      - chi-square tests
+      - goodness-of-fit tests
+      Regression models:
+      - simple linear regression
+      - interpretation of regression parameters
+      - residual analysis
+      Applications to empirical correlations in geotechnical engineering and data-driven engineering
+      models.
 
   - id: A3
     name: "Time Series Analysis and Data-driven Modeling"
