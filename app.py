@@ -104,9 +104,11 @@ for c in courses:
 
 st.subheader("Phase B")
 
-sectors = sorted(
-    set(c.get("sector", "") for c in courses if c["phase"] == "B")
-)
+sectors = [
+    "Mechanics of Solids and Structures",
+    "Structural Engineering",
+    "Geotechnical Engineering"
+]
 
 for s in sectors:
     st.markdown(f"### {s}")
