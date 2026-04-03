@@ -1,4 +1,11 @@
 import streamlit as st
+
+st.sidebar.header("Admin Login")
+
+password = st.sidebar.text_input("Password", type="password")
+
+ADMIN_PASSWORD = "sge_26"
+import streamlit as st
 import yaml
 import gspread
 from google.oauth2.service_account import Credentials
