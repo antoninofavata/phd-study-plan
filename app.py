@@ -85,9 +85,9 @@ for c in courses:
         with st.expander(c["name"]):
             st.markdown(f"**Available in:** {years_str}")
 
-             if "professor" in c:
+            if "professor" in c:
                 st.markdown(f"**Professor:** {c['professor']}")
-                 
+
             if "description" in c:
                 st.markdown("**Description**")
                 st.write(c["description"])
