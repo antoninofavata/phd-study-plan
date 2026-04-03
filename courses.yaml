@@ -403,6 +403,43 @@ courses:
     phase: B
     sector: "Structural Engineering"
     years: [2026]
+    professor: "Stefano Pampanin"
+    description: |
+      The 2010-2011 Canterbury (New Zealand) earthquake sequence has highlighted the severe
+      mismatch between societal expectations over the reality of seismic performance of modern
+      buildings. Life Safety is not enough for modern societies; a paradigm shift in performance-based
+      design criteria and objective towards Damage Control, or low-damage, design philosophy and
+      technologies is urgently required. The ‘bar’ has been raised significantly with the request to fast
+      track the development of what the general public would refer to as the “ultimate” earthquake
+      resisting (towards an “earthquake proof”) building system, capable of sustaining the shaking of a
+      severe earthquake basically unscathed. 
+      
+      This short course will provide an overview of recent
+      advances through extensive research, development and implementation, carried out in the past
+      twenty-five years, of an integrated low-damage building system including the skeleton of the
+      superstructure and the non-structural components. Examples of real on site-applications of such
+      low-damage technology in New Zealand and worldwide, using concrete, timber (engineered wood),
+      steel or a combination of these materials, and featuring some of the latest innovative technical
+      solutions developed in the laboratory will be presented as comforting example of successful transfer
+      of performance-based seismic design approach and advanced technology from theory to practice in
+      line with the broader objective of Building Resilience.
+    program: |
+      - Overview of the Canterbury earthquakes sequence: lessons learnt, impact on performance-
+      based design philosophy and opportunity for a wide implementation of the next generation of
+      damage-resisting structures
+      - Alternative design philosophies and solutions for the seismic design of precast concrete
+      structures. Emulation of cast-in situ concrete. Introduction to jointed ductile connections,
+      
+      - Research and Development of PRESSS-concrete Technology and the hybrid system concept.
+      Research & Development of these systems.
+      - Extension to Timber: development of multi-storey long-span prestressed timber (Pres-Lam)
+      buildings using engineered wood materials (Glulam, LVL, Cross-Lam)
+      
+      - Examples of on-site applications worldwide of PRESSS and PRES-LAM technology in low-, medium- or high-seismic areas. Constructability aspects, sequence and detailing.
+      - Cost/Performance evaluation of low-damage technologies. Resilience and Sustainability
+      considerations
+    
+    
 
   - id: B7
     name: "Masonry structures: from analytical to experimental approaches"
