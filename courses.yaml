@@ -477,6 +477,25 @@ courses:
     phase: B
     sector: "Geotechnical Engineering"
     years: [2025]
+    professor: "Daniela Boldini"
+    description: |
+      This 20-hour course is designed to provide a comprehensive understanding, at the post-graduate level, of the key aspects of saturated soil modelling 
+      using the Finite Element method. It begins by introducing the field equations that govern the interaction between soil skeleton and pore fluid under 
+      static conditions, followed by their finite element discretization and solution. The course also delves into the implementation of soil constitutive 
+      laws at the level of Gauss integration points, encompassing both common explicit and implicit numerical algorithms. The scope of the governing equations 
+      is then expanded to cover dynamic conditions, offering insights into addressing earthquake geomechanical problems. In the final session, the course explores 
+      relevant challenges in practical applications, including considerations such as 2D versus 3D schematization, initial and boundary conditions, staged construction, 
+      and soil-structure problems, illustrated with practical examples.
+    program: |
+      A review of finite element theory for linear and non-linear materials
+      
+      Pore pressure calculation, seepage and consolidation
+      
+      Numerical implementation of soil constitutive laws 
+      
+      Seismic geotechnical problems
+      
+      Relevant issues in practical applications
 
   - id: B10
     name: "Soil Structure Interaction"
