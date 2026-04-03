@@ -208,8 +208,7 @@ courses:
       complex problems in solid and structural mechanics. Starting from the foundations of functional analysis, 
       the program will explore how variational methods make it possible to extend the search for solutions to problems 
       that do not admit a classical treatment, with particular attention to nonlinear phenomena such as damage and plasticity.
-    program: |
-    
+    program: |    
       1. *Introduction to Variational Methods*
       
       - Limitations of the classical formulation of partial differential equations (PDEs).
