@@ -248,35 +248,31 @@ if admin_mode:
             else:
                 st.write("No data available")
 
-        # ======================
-        # COURSE COUNTS
-        # ======================
-        st.subheader("Students per course")
+      # ======================
+# COURSE COUNTS
+# ======================
 
-        course_counts = {}
+st.subheader("Students per course")
 
-        if "course" in df.columns:
+course_counts = {}
 
-            for row in df["course"]:
+if "course" in df.columns:
 
-                if pd.isna(row):
-                    continue
+    for row in df["course"]:
 
-                courses_list = [
-                    c.strip() for c in str(row).split(",") if c.strip()
-                ]
+        if pd.isna(row):
+            continue
 
-                for c in courses_list:
-                    course_counts[c] = course_counts.get(c, 0) + 1
+        courses_list = [
+            c.strip() for c in str(row).split(",") if c.strip()
+        ]
 
-            if course_counts:
-                for course, count in sorted(course_counts.items()):
-                    st.write(f"- {course}: {count}")
-            else:
-                st.write("No courses found")
+        for c in courses_list:
+            course_counts[c] = course_counts.get(c, 0) + 1
 
-        else:
-            st.warning("Column 'course' not found")
+    if course_counts:
+        for course, count in sorted(course_counts.items()):
+            st.write(f"- {course}: {count}")
 
 else:
     st.warning("Column 'course' not found")
