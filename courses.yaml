@@ -395,17 +395,17 @@ courses:
     phase: B
     sector: "Structural Engineering"
     years: [2026]
-    professor: Linda Giresini, Claudia Casapulla, Domenico Liberatore
+    professor: "Linda Giresini, Claudia Casapulla, Domenico Liberatore"
     description: |
-    This course provides a comprehensive analysis of the performance of masonry structures, 
-    covering both global and local approaches. Following an introduction to micro-, meso-, and macro-scale modeling based on homogenization techniques, 
-    the curriculum explores state-of-the-art methods, including Discrete Element Methods (DEM), Applied Element Method (AEM), Finite Element Method (FEM), 
-    and Limit Analysis (LA). It provides a deep dive into both global and local analysis, drawing on real-world examples of historic and existing buildings 
-    to illustrate strengthening techniques, as well as in-plane and out-of-plane behavior and wall interlocking. 
-    Furthermore, lessons learned from recent earthquakes are analyzed considering disaggregation, out-of-plane and in-plane mechanisms. 
-    The course also covers traditional and advanced experimental techniques in static and dynamic fields, such as motion magnification. 
-    Traditional and innovative retrofit techniques for masonry structures are explored, including injections, CRM, CAM and others). 
-    Finally, non-linear dynamic rocking analyses of local mechanisms are addressed, incorporating dissipative earthquake-resistant devices.
+      This course provides a comprehensive analysis of the performance of masonry structures, 
+      covering both global and local approaches. Following an introduction to micro-, meso-, and macro-scale modeling based on homogenization techniques, 
+      the curriculum explores state-of-the-art methods, including Discrete Element Methods (DEM), Applied Element Method (AEM), Finite Element Method (FEM), 
+      and Limit Analysis (LA). It provides a deep dive into both global and local analysis, drawing on real-world examples of historic and existing buildings 
+      to illustrate strengthening techniques, as well as in-plane and out-of-plane behavior and wall interlocking. 
+      Furthermore, lessons learned from recent earthquakes are analyzed considering disaggregation, out-of-plane and in-plane mechanisms. 
+      The course also covers traditional and advanced experimental techniques in static and dynamic fields, such as motion magnification. 
+      Traditional and innovative retrofit techniques for masonry structures are explored, including injections, CRM, CAM and others). 
+      Finally, non-linear dynamic rocking analyses of local mechanisms are addressed, incorporating dissipative earthquake-resistant devices.
 
 
   # ======================
