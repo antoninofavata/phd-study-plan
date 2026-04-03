@@ -198,34 +198,36 @@ if st.button("Submit Study Plan"):
 
         st.success("Study plan submitted successfully!")
 
-# ======================
-# ADMIN DASHBOARD
-# ======================
+if not df.empty:
 
-if admin_mode:
+    # ======================
+    # STUDENT → COURSES
+    # ======================
+    st.subheader("👨‍🎓 Students and their courses")
 
-    st.sidebar.success("Admin mode ON")
+    for _, row in df.iterrows():
+        student = row.get("student", "Unknown")
+        courses = [c.strip() for c in str(row["course"]).split(",")]
 
-    data = sheet.get_all_records()
-    df = pd.DataFrame(data)
+        with st.expander(student):
+            for c in courses:
+                st.write(f"- {c}")
 
-    st.header("📊 Admin Dashboard")
+    # ======================
+    # COURSES COUNT (già esistente)
+    # ======================
+    st.subheader("📊 Students per course")
 
-    if not df.empty:
+    course_counts = {}
 
-        st.subheader("Students per course")
+    for row in df["course"]:
+        courses_list = [c.strip() for c in str(row).split(",")]
 
-        # conta iscritti per corso
-        course_counts = {}
+        for c in courses_list:
+            course_counts[c] = course_counts.get(c, 0) + 1
 
-        for row in df["course"]:
-            courses_list = [c.strip() for c in row.split(",")]
+    for course, count in course_counts.items():
+        st.write(f"- {course}: {count}")
 
-            for c in courses_list:
-                course_counts[c] = course_counts.get(c, 0) + 1
-
-        for course, count in course_counts.items():
-            st.write(f"- {course}: {count}")
-
-    else:
-        st.write("No data yet")
+else:
+    st.write("No data yet")
