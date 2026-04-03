@@ -58,13 +58,13 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 
 st.sidebar.header("Admin")
 
-st.sidebar.header("Admin")
-
 password = st.sidebar.text_input("Password", type="password")
 
 admin_mode = False
 
-if password == st.secrets.get("ADMIN_PASSWORD", ""):
+admin_password = st.secrets.get("ADMIN_PASSWORD", None)
+
+if admin_password and password == admin_password:
     admin_mode = True
 
 # ======================
