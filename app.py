@@ -54,19 +54,28 @@ st.title("PhD Program in Structural and Geotechnical Engineering")
 # ======================
 # ADMIN LOGIN
 # ======================
+‎app.py‎
++10-3Lines changed: 10 additions & 3 deletions
+Original file line number	Diff line number	Diff line change
+@@ -55,14 +55,21 @@ def connect():
+# ADMIN LOGIN
+# ======================
 
-admin_password = st.secrets["app"]["ADMIN_PASSWORD"]
+import streamlit as st
+admin_password = st.secrets.get("ADMIN_PASSWORD", "")
 
 password = st.sidebar.text_input("Password", type="password")
 
+admin_mode = (password == admin_password)
 if "admin_mode" not in st.session_state:
     st.session_state.admin_mode = False
-
 if password:
-    if password == admin_password:
-        st.session_state.admin_mode = True
-
+    st.session_state.admin_mode = (password == admin_password)
 admin_mode = st.session_state.admin_mode
+
+st.sidebar.write("Inserita:", repr(password))
+st.sidebar.write("Salvata:", repr(admin_password))
+st.sidebar.write("Admin mode:", admin_mode)
 
 
 # ======================
