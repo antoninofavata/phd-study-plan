@@ -260,7 +260,7 @@ st.subheader("📊 Students per course")
 
 course_counts = {}
 
-    if "course" in df.columns:
+if "course" in df.columns:
     
         for row in df["course"]:
     
