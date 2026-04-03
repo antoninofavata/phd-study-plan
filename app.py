@@ -209,17 +209,18 @@ if admin_mode:
 
     else:
 
-        # ======================
-        # STUDENTS → COURSES
-        # ======================
-        st.subheader("👨‍🎓 Students and their courses")
+     # ======================
+# STUDENTS → COURSES
+# ======================
 
-        if "name" in df.columns and "course" in df.columns:
-    
-            for _, row in df.iterrows():
-                student = row["name"]  # <-- FIX
-        
-                courses_raw = row["course"]
+st.subheader("👨‍🎓 Students and their courses")
+
+if "name" in df.columns and "course" in df.columns:
+
+    for _, row in df.iterrows():
+
+        student = row["name"]
+        courses_raw = row["course"]
 
         if pd.isna(courses_raw):
             continue
@@ -232,18 +233,8 @@ if admin_mode:
             for c in courses_list:
                 st.write(f"- {c}")
 
-            for _, row in df.iterrows():
-                student = row["student"]
-                courses_raw = row["course"]
-
-                courses_list = [
-                    c.strip() for c in str(courses_raw).split(",") if c.strip()
-                ]
-
-                with st.expander(student):
-                    for c in courses_list:
-                        st.write(f"- {c}")
-
+else:
+    st.warning("Required columns not found")
        # ======================
 # COURSE COUNTS
 # ======================
