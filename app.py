@@ -272,7 +272,7 @@ if admin_mode:
         # ======================
         # EXPORT STRUCTURED PLANS
         # ======================
-        st.subheader("📥 Export structured plans")
+        st.subheader("Export structured plans")
 
         import io
         from collections import defaultdict
