@@ -293,7 +293,7 @@ if admin_mode:
         # PIANI DI STUD
         # ======================
 
-        st.subheader("Export: general plans (one course per row)")
+        st.subheader("📥 Export: structured plans (clean layout)")
 
         import io
         from collections import defaultdict
@@ -329,24 +329,31 @@ if admin_mode:
         
                     courses = sorted(set(r["course"] for r in records))
         
-                    # una riga per ogni corso
-                    df_student = pd.DataFrame([
-                        {
-                            "name": student,
-                            "cycle": cycle,
-                            "email": email,
-                            "course": c
-                        }
-                        for c in courses
-                    ])
+                    # costruzione righe manuale
+                    rows = []
+        
+                    # intestazione (una sola volta)
+                    rows.append(["Name", student, "", ""])
+                    rows.append(["Cycle", cycle, "", ""])
+                    rows.append(["Email", email, "", ""])
+                    rows.append(["", "", "", ""])  # riga vuota
+        
+                    # header tabella corsi
+                    rows.append(["Courses", "", "", ""])
+        
+                    # elenco corsi
+                    for c in courses:
+                        rows.append(["", c, "", ""])
+        
+                    df_student = pd.DataFrame(rows)
         
                     sheet_name = student[:31]
         
-                    df_student.to_excel(writer, sheet_name=sheet_name, index=False)
+                    df_student.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
         
             st.download_button(
-                label="Download all students (row per course)",
+                label="Download structured plans (Excel)",
                 data=buffer.getvalue(),
-                file_name="students_by_course.xlsx",
+                file_name="students_structured.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
