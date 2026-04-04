@@ -269,69 +269,79 @@ if admin_mode:
         for course, count in sorted(course_counts.items()):
             st.write(f"- {course}: {count}")
 
-        # ======================
+              # ======================
         # EXPORT STRUCTURED PLANS
         # ======================
+        
         st.subheader("Export structured plans")
-
+        
         import io
         from collections import defaultdict
-
+        
         student_data = defaultdict(list)
-
+        
         for _, row in df.iterrows():
-
+        
             first_name = row.get("first_name")
             last_name = row.get("last_name")
             email = row.get("email")
             cycle = row.get("cycle")
             course = row.get("course")
-
+        
             if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
                 continue
-
-            student = f"{first_name} {last_name}"
-
-            student_data[student].append({
+        
+            # chiave più robusta: tupla (cognome, nome)
+            student_key = (last_name, first_name)
+        
+            student_data[student_key].append({
+                "first_name": first_name,
+                "last_name": last_name,
                 "email": email,
                 "cycle": cycle,
                 "course": course
             })
-
+        
         buffer = io.BytesIO()
-
+        
         with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-
-            for student in sorted(student_data.keys(), key=lambda s: s.split()[-1]):
-
-                records = student_data[student]
-
+        
+            # ordinamento per cognome, poi nome
+            for (last_name, first_name) in sorted(student_data.keys()):
+        
+                records = student_data[(last_name, first_name)]
+        
                 email = records[0]["email"]
                 cycle = records[0]["cycle"]
-
+        
                 courses = sorted(set(r["course"] for r in records))
-
+        
                 rows = []
-
-                rows.append(["Name", student, "", ""])
+        
+                # intestazione
+                rows.append(["Last name", last_name, "", ""])
+                rows.append(["First name", first_name, "", ""])
                 rows.append(["Cycle", cycle, "", ""])
                 rows.append(["Email", email, "", ""])
                 rows.append(["", "", "", ""])
-
+        
+                # lista corsi
                 rows.append(["Courses", "", "", ""])
-
+        
                 for c in courses:
                     rows.append(["", c, "", ""])
-
+        
                 df_student = pd.DataFrame(rows)
-
+        
+                sheet_name = f"{last_name}_{first_name}"[:31]
+        
                 df_student.to_excel(
                     writer,
-                    sheet_name=student[:31],
+                    sheet_name=sheet_name,
                     index=False,
                     header=False
                 )
-
+        
         st.download_button(
             label="Download structured plans",
             data=buffer.getvalue(),
