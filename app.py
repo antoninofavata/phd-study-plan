@@ -588,47 +588,4 @@ if admin_mode:
         # PIANI DI STUD
         # ======================
 
-        st.subheader("Export: general plans")
-        
-        import io
-        from collections import defaultdict
-        
-        if "name" in df.columns and "course" in df.columns and "email" in df.columns:
-        
-            # raggruppa dati per studente
-            student_data = defaultdict(list)
-        
-            for _, row in df.iterrows():
-        
-                name = row.get("name")
-                email = row.get("email")
-                course = row.get("course")
-        
-                if pd.isna(name) or pd.isna(course):
-                    continue
-        
-                student_data[name].append({
-                    "course": course,
-                    "email": email
-                })
-        
-            # crea file Excel
-            buffer = io.BytesIO()
-        
-            with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-        
-                for student, records in student_data.items():
-        
-                    df_student = pd.DataFrame(records)
-        
-                    # nome foglio (massimo 31 caratteri)
-                    sheet_name = student[:31]
-        
-                    df_student.to_excel(writer, sheet_name=sheet_name, index=False)
-        
-            st.download_button(
-                label="Download all students (Excel)",
-                data=buffer.getvalue(),
-                file_name="all_students_plans.xlsx",
-                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-            )
+       
