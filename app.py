@@ -247,7 +247,7 @@ if admin_mode:
         # ======================
         # EXPORT PER COURSE
         # ======================
-        st.subheader("📥 Export students per course")
+        st.subheader("Export students per course")
 
         import io
 
