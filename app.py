@@ -48,7 +48,7 @@ sheet = client.open_by_key(
 # TITLE
 # ======================
 
-st.title("PhD  in Structural and Geotechnical Engineering")
+st.title("PhD in Structural and Geotechnical Engineering")
 
 # ======================
 # ADMIN LOGIN
@@ -90,13 +90,11 @@ for c in courses:
 
             if "description" in c:
                 st.markdown("**Description**")
-                st.write(c["description"])
+                st.markdown(c["description"])
 
             if "program" in c:
                 st.markdown("**Program**")
                 st.markdown(c["program"])
-
-          #  st.markdown("---")
 
 # ----------------------
 # PHASE B
@@ -132,8 +130,6 @@ for s in sectors:
                     st.markdown("**Program**")
                     st.markdown(c["program"])
 
-                
-
 # ======================
 # RULES
 # ======================
@@ -154,6 +150,7 @@ st.header("Create your Study Plan")
 
 name = st.text_input("Name")
 cycle = st.text_input("Cycle")
+email = st.text_input("Email")
 
 # ======================
 # COURSE SELECTION
@@ -165,7 +162,6 @@ selected_courses = []
 
 for c in courses:
     years_str = ", ".join(f"{y}/{y+1}" for y in c["years"])
-
     label = f"{c['name']} ({years_str})"
 
     if st.checkbox(label):
@@ -189,7 +185,7 @@ else:
 
 if st.button("Submit Study Plan"):
 
-    if not name or not cycle:
+    if not name or not cycle or not email:
         st.error("Please fill in all required fields.")
 
     elif not selected_courses:
@@ -200,6 +196,7 @@ if st.button("Submit Study Plan"):
             sheet.append_row([
                 name,
                 cycle,
+                email,
                 course
             ])
 
@@ -232,16 +229,12 @@ if admin_mode:
             for _, row in df.iterrows():
 
                 student = row.get("name")
-                courses_raw = row.get("course")
+                course = row.get("course")
 
-                if pd.isna(student) or pd.isna(courses_raw):
+                if pd.isna(student) or pd.isna(course):
                     continue
 
-                courses_list = [
-                    c.strip() for c in str(courses_raw).split(",") if c.strip()
-                ]
-
-                student_courses.setdefault(student, []).extend(courses_list)
+                student_courses.setdefault(student, []).append(course)
 
             for student in sorted(student_courses):
 
@@ -254,27 +247,17 @@ if admin_mode:
         # ======================
         # COURSE COUNTS
         # ======================
-# ======================
-# COURSE COUNTS
-# ======================
+        st.subheader("Students per course")
 
-            st.subheader("Students per course")
-            
+        if "course" in df.columns:
+
             course_counts = {}
-            
-            if admin_mode and "course" in df.columns:
-            
-                for row in df["course"]:
-            
-                    if pd.isna(row):
-                        continue
-            
-                    courses_list = [
-                        c.strip() for c in str(row).split(",") if c.strip()
-                    ]
-            
-                    for c in courses_list:
-                        course_counts[c] = course_counts.get(c, 0) + 1
-            
-                for course, count in sorted(course_counts.items()):
-                    st.write(f"- {course}: {count}")
+
+            for course in df["course"]:
+                if pd.isna(course):
+                    continue
+
+                course_counts[course] = course_counts.get(course, 0) + 1
+
+            for course, count in sorted(course_counts.items()):
+                st.write(f"- {course}: {count}")
