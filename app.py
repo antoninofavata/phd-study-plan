@@ -338,3 +338,55 @@ if admin_mode:
             file_name="students_structured.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+
+#=======ISCRITTI PER CORSO
+
+# ======================
+# EXPORT PER COURSE (CLEAN)
+# ======================
+
+        st.subheader("Export students per course")
+        
+        import io
+        
+        required_cols = {"first_name", "last_name", "email", "cycle", "course"}
+        
+        if required_cols.issubset(df.columns):
+        
+            courses_list = sorted(df["course"].dropna().unique())
+        
+            for course in courses_list:
+        
+                df_course = df[df["course"] == course]
+        
+                # rimuove duplicati studenti nello stesso corso
+                df_course = df_course.drop_duplicates(
+                    subset=["first_name", "last_name", "email"]
+                )
+        
+                # seleziona e rinomina colonne
+                df_export = df_course[[
+                    "last_name",
+                    "first_name",
+                    "cycle",
+                    "email"
+                ]].rename(columns={
+                    "last_name": "Cognome",
+                    "first_name": "Nome",
+                    "cycle": "Ciclo",
+                    "email": "Email"
+                })
+        
+                buffer = io.BytesIO()
+        
+                with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+                    df_export.to_excel(writer, index=False, sheet_name="Students")
+        
+                file_name = course.replace(" ", "_").replace(",", "") + ".xlsx"
+        
+                st.download_button(
+                    label=f"Download: {course}",
+                    data=buffer.getvalue(),
+                    file_name=file_name,
+                    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
