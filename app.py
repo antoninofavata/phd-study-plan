@@ -293,14 +293,13 @@ if admin_mode:
         # PIANI DI STUD
         # ======================
 
-        st.subheader("📥 Export: general plans (clean format)")
+        st.subheader("Export: general plans (one course per row)")
 
         import io
         from collections import defaultdict
         
         if "name" in df.columns and "course" in df.columns and "email" in df.columns and "cycle" in df.columns:
         
-            # raggruppa per studente
             student_data = defaultdict(list)
         
             for _, row in df.iterrows():
@@ -325,28 +324,29 @@ if admin_mode:
         
                 for student, records in student_data.items():
         
-                    # valori unici
                     email = records[0]["email"]
                     cycle = records[0]["cycle"]
         
-                    # lista corsi (senza duplicati)
                     courses = sorted(set(r["course"] for r in records))
         
-                    # una sola riga per studente
-                    df_student = pd.DataFrame([{
-                        "name": student,
-                        "cycle": cycle,
-                        "email": email,
-                        "courses": "\n".join(courses)
-                    }])
+                    # una riga per ogni corso
+                    df_student = pd.DataFrame([
+                        {
+                            "name": student,
+                            "cycle": cycle,
+                            "email": email,
+                            "course": c
+                        }
+                        for c in courses
+                    ])
         
                     sheet_name = student[:31]
         
                     df_student.to_excel(writer, sheet_name=sheet_name, index=False)
         
             st.download_button(
-                label="Download all students (clean Excel)",
+                label="Download all students (row per course)",
                 data=buffer.getvalue(),
-                file_name="students_clean.xlsx",
+                file_name="students_by_course.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
