@@ -218,6 +218,33 @@ if admin_mode:
     if not df.empty:
 
         # ======================
+        # STUDENTS → COURSES
+        # ======================
+        st.subheader("Students and their courses")
+
+        if "name" in df.columns and "course" in df.columns:
+
+            student_courses = {}
+
+            for _, row in df.iterrows():
+
+                student = row.get("name")
+                course = row.get("course")
+
+                if pd.isna(student) or pd.isna(course):
+                    continue
+
+                student_courses.setdefault(student, []).append(course)
+
+            for student in sorted(student_courses):
+
+                courses = sorted(set(student_courses[student]))
+
+                with st.expander(student):
+                    for c in courses:
+                        st.write(f"- {c}")
+
+        # ======================
         # EXPORT PER COURSE
         # ======================
         st.subheader("📥 Export students per course")
@@ -230,17 +257,12 @@ if admin_mode:
 
             for course in courses_list:
 
-                # filtra studenti per corso
                 df_course = df[df["course"] == course][["name", "email"]]
-
-                # rimuove duplicati
                 df_course = df_course.drop_duplicates()
 
-                # crea file Excel in memoria
                 buffer = io.BytesIO()
                 df_course.to_excel(buffer, index=False)
 
-                # nome file pulito
                 file_name = course.replace(" ", "_").replace(",", "") + ".xlsx"
 
                 st.download_button(
@@ -248,8 +270,7 @@ if admin_mode:
                     data=buffer.getvalue(),
                     file_name=file_name,
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                )
-        # ======================
+                )        # ======================
         # COURSE COUNTS
         # ======================
         st.subheader("Students per course")
