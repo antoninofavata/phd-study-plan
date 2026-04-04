@@ -293,47 +293,60 @@ if admin_mode:
         # PIANI DI STUD
         # ======================
 
-        st.subheader("Export: general plans")
-        
+        st.subheader("📥 Export: general plans (clean format)")
+
         import io
         from collections import defaultdict
         
-        if "name" in df.columns and "course" in df.columns and "email" in df.columns:
+        if "name" in df.columns and "course" in df.columns and "email" in df.columns and "cycle" in df.columns:
         
-            # raggruppa dati per studente
+            # raggruppa per studente
             student_data = defaultdict(list)
         
             for _, row in df.iterrows():
         
                 name = row.get("name")
                 email = row.get("email")
+                cycle = row.get("cycle")
                 course = row.get("course")
         
                 if pd.isna(name) or pd.isna(course):
                     continue
         
                 student_data[name].append({
-                    "course": course,
-                    "email": email
+                    "email": email,
+                    "cycle": cycle,
+                    "course": course
                 })
         
-            # crea file Excel
             buffer = io.BytesIO()
         
             with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
         
                 for student, records in student_data.items():
         
-                    df_student = pd.DataFrame(records)
+                    # valori unici
+                    email = records[0]["email"]
+                    cycle = records[0]["cycle"]
         
-                    # nome foglio (massimo 31 caratteri)
+                    # lista corsi (senza duplicati)
+                    courses = sorted(set(r["course"] for r in records))
+        
+                    # una sola riga per studente
+                    df_student = pd.DataFrame([{
+                        "name": student,
+                        "cycle": cycle,
+                        "email": email,
+                        "courses": "\n".join(courses)
+                    }])
+        
                     sheet_name = student[:31]
         
                     df_student.to_excel(writer, sheet_name=sheet_name, index=False)
         
             st.download_button(
-                label="Download all students (Excel)",
+                label="Download all students (clean Excel)",
                 data=buffer.getvalue(),
-                file_name="all_students_plans.xlsx",
+                file_name="students_clean.xlsx",
                 mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
             )
