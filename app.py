@@ -291,7 +291,7 @@ if admin_mode:
             if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
                 continue
         
-            # chiave più robusta: tupla (cognome, nome)
+            
             student_key = (last_name, first_name)
         
             student_data[student_key].append({
@@ -306,7 +306,7 @@ if admin_mode:
         
         with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
         
-            # ordinamento per cognome, poi nome
+            # ordinamento per cognome
             for (last_name, first_name) in sorted(student_data.keys()):
         
                 records = student_data[(last_name, first_name)]
