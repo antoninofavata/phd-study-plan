@@ -269,7 +269,7 @@ if admin_mode:
         for course, count in sorted(course_counts.items()):
             st.write(f"- {course}: {count}")
 
-              # ======================
+        # ======================
         # EXPORT STRUCTURED PLANS
         # ======================
         
@@ -349,10 +349,10 @@ if admin_mode:
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
 
-#=======ISCRITTI PER CORSO
+
 
 # ======================
-# EXPORT PER COURSE (CLEAN)
+# EXPORT PER COURSE 
 # ======================
 
         st.subheader("Export students per course")
