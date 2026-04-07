@@ -254,11 +254,7 @@ if admin_mode:
             with st.expander(student):
                 for c in courses:
                     st.write(f"- {c}")
-                notes = records[0].get("notes")
-
-                if notes and not pd.isna(notes):
-                st.markdown("**Notes:**")
-                st.write(notes)
+               
 
         # ======================
         # COURSE COUNTS
