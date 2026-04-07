@@ -227,42 +227,51 @@ if admin_mode:
 
     if not df.empty:
 
-        # ======================
-        # STUDENTS → COURSES
-        # ======================
-        st.subheader("Students and their courses")
+# ======================
+# STUDENTS → COURSES
+# ======================
 
-        student_courses = {}
+st.subheader("Students and their courses")
 
-        for _, row in df.iterrows():
+if "first_name" in df.columns and "last_name" in df.columns and "course" in df.columns:
 
-            first_name = row.get("first_name")
-            last_name = row.get("last_name")
-            course = row.get("course")
+    student_data = {}
 
-            if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
-                continue
+    for _, row in df.iterrows():
 
-            student = f"{first_name} {last_name}"
+        first_name = row.get("first_name")
+        last_name = row.get("last_name")
+        course = row.get("course")
+        notes = row.get("notes")
 
-            student_courses.setdefault(student, []).append(course)
+        if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
+            continue
 
-        for student in sorted(student_courses):
+        student = f"{first_name} {last_name}"
 
-            courses = sorted(set(student_courses[student]))
+        if student not in student_data:
+            student_data[student] = {
+                "courses": [],
+                "notes": notes
+            }
 
-            with st.expander(student):
+        student_data[student]["courses"].append(course)
 
-                for c in courses:
-                    st.write(f"- {c}")
-            
-                # mostra le notes (una sola volta)
-                notes = records[0].get("notes")
-            
-                if notes and not pd.isna(notes):
-                    st.markdown("**Notes:**")
-                    st.write(notes)
-               
+            # ORDINAMENTO PER COGNOME
+            for student in sorted(student_data.keys(), key=lambda s: s.split()[-1]):
+        
+                courses = sorted(set(student_data[student]["courses"]))
+                notes = student_data[student]["notes"]
+        
+                with st.expander(student):
+        
+                    for c in courses:
+                        st.write(f"- {c}")
+        
+                    if notes and not pd.isna(notes):
+                        st.markdown("**Notes:**")
+                        st.write(notes)
+                       
 
         # ======================
         # COURSE COUNTS
