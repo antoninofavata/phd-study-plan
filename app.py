@@ -156,6 +156,7 @@ first_name = st.text_input("First Name")
 last_name = st.text_input("Last Name")
 cycle = st.text_input("Cycle")
 email = st.text_input("Email")
+notes = st.text_area("Notes (optional)")
 
 # ======================
 # COURSE SELECTION
@@ -205,7 +206,8 @@ if st.button("Submit Study Plan"):
                 last_name,
                 cycle,
                 email,
-                course
+                course,
+                notes
             ])
 
         st.success("Study plan submitted successfully!")
