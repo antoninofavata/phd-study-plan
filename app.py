@@ -247,27 +247,13 @@ if admin_mode:
 
             student_courses.setdefault(student, []).append(course)
 
-        student_data = {}
+        for student in sorted(student_courses):
 
-for _, row in df.iterrows():
+            courses = sorted(set(student_courses[student]))
 
-    first_name = row.get("first_name")
-    last_name = row.get("last_name")
-    course = row.get("course")
-    notes = row.get("notes")
-
-    if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
-        continue
-
-    student = f"{first_name} {last_name}"
-
-    for student in sorted(student_courses):
-
-    courses = sorted(set(student_courses[student]))
-
-    with st.expander(student):
-        for c in courses:
-            st.write(f"- {c}")
+            with st.expander(student):
+                for c in courses:
+                    st.write(f"- {c}")
 
         # ======================
         # COURSE COUNTS
