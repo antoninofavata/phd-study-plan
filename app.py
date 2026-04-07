@@ -252,8 +252,16 @@ if admin_mode:
             courses = sorted(set(student_courses[student]))
 
             with st.expander(student):
-                for c in courses:
-                    st.write(f"- {c}")
+
+            for c in courses:
+                st.write(f"- {c}")
+        
+            # mostra le notes (una sola volta)
+            notes = records[0].get("notes")
+        
+            if notes and not pd.isna(notes):
+                st.markdown("**Notes:**")
+                st.write(notes)
                
 
         # ======================
