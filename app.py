@@ -340,7 +340,21 @@ if admin_mode:
             file_name="students_structured.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
         )
+# ======================
+# COURSE COUNTS
+# ======================
 
+st.subheader("Students per course")
+
+course_counts = {}
+
+for course in df["course"]:
+    if pd.isna(course):
+        continue
+    course_counts[course] = course_counts.get(course, 0) + 1
+
+for course, count in sorted(course_counts.items()):
+    st.write(f"- {course}: {count}")
 
 # ======================
 # EXPORT PER COURSE 
