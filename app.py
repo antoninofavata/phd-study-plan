@@ -151,7 +151,19 @@ first_name = st.text_input("First Name")
 last_name = st.text_input("Last Name")
 cycle = st.text_input("Cycle")
 email = st.text_input("Email")
-notes = st.text_area("Notes (optional)")
+st.markdown("### Notes (optional)")
+
+st.caption(
+    """
+    Please use this field to include:
+    - Courses attended last year (for 2nd year PhD students)
+    - Planned courses (CISM, other PhD programs, etc.)
+    - Special cases or exceptions
+    - Any additional relevant information
+    """
+)
+
+notes = st.text_area("")
 
 # ======================
 # COURSE SELECTION
