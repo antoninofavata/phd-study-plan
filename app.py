@@ -137,7 +137,8 @@ st.header("Rules")
 st.markdown("""
 - At least **3 courses from Phase A**  
 - At least **3 courses from Phase B**  
-- At least **4 courses in Year 1**  
+- At least **4 courses in Year 1**
+- Students in the current second year (40th cycle) are required to choose at least three courses in total (preferably complementary to those already taken)**
 """)
 
 # ======================
