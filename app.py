@@ -56,11 +56,7 @@ st.title("PhD in Structural and Geotechnical Engineering")
 
 admin_password = st.secrets["app"]["ADMIN_PASSWORD"]
 
-password = st.sidebar.text_input(
-    "Password",
-    type="password",
-    key="admin_password"
-)
+password = st.sidebar.text_input("Password", type="password")
 
 if "admin_mode" not in st.session_state:
     st.session_state.admin_mode = False
@@ -152,11 +148,9 @@ st.markdown("""
 
 st.header("Create your Study Plan")
 
-first_name = st.text_input("First Name")
-last_name = st.text_input("Last Name")
+name = st.text_input("Name")
 cycle = st.text_input("Cycle")
 email = st.text_input("Email")
-notes = st.text_area("Notes (optional)")
 
 # ======================
 # COURSE SELECTION
@@ -191,23 +185,19 @@ else:
 
 if st.button("Submit Study Plan"):
 
-    if not first_name or not last_name or not cycle or not email:
+    if not name or not cycle or not email:
         st.error("Please fill in all required fields.")
 
     elif not selected_courses:
         st.error("Please select at least one course.")
 
     else:
-        full_name = f"{first_name} {last_name}"
-
         for course in selected_courses:
             sheet.append_row([
-                first_name,
-                last_name,
+                name,
                 cycle,
                 email,
-                course,
-                notes
+                course
             ])
 
         st.success("Study plan submitted successfully!")
@@ -232,284 +222,138 @@ if admin_mode:
         # ======================
         st.subheader("Students and their courses")
 
-        if "first_name" in df.columns and "last_name" in df.columns and "course" in df.columns:
+        if "name" in df.columns and "course" in df.columns:
 
-            student_data = {}
-
-            for _, row in df.iterrows():
-
-                first_name = row.get("first_name")
-                last_name = row.get("last_name")
-                course = row.get("course")
-                notes = row.get("notes")
-
-                if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
-                    continue
-
-                student = f"{first_name} {last_name}"
-
-                if student not in student_data:
-                    student_data[student] = {
-                        "courses": [],
-                        "notes": notes
-                    }
-
-                student_data[student]["courses"].append(course)
-
-            for student in sorted(student_data.keys(), key=lambda s: s.split()[-1]):
-
-                courses = sorted(set(student_data[student]["courses"]))
-                notes = student_data[student]["notes"]
-
-                with st.expander(student):
-
-                    for c in courses:
-                        st.write(f"- {c}")
-
-                    if notes and not pd.isna(notes):
-                        st.markdown("**Notes:**")
-                        st.write(notes)
-
-            else:
-                st.write("No data yet")
-
-        # ======================
-        # STUDENTS → COURSES
-        # ======================
-
-        st.subheader("Students and their courses")
-
-        if "first_name" in df.columns and "last_name" in df.columns and "course" in df.columns:
-
-            student_data = {}
+            student_courses = {}
 
             for _, row in df.iterrows():
 
-                first_name = row.get("first_name")
-                last_name = row.get("last_name")
+                student = row.get("name")
                 course = row.get("course")
-                notes = row.get("notes")
 
-                if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
+                if pd.isna(student) or pd.isna(course):
                     continue
 
-                student = f"{first_name} {last_name}"
+                student_courses.setdefault(student, []).append(course)
 
-                if student not in student_data:
-                    student_data[student] = {
-                        "courses": [],
-                        "notes": notes
-                    }
+            for student in sorted(student_courses):
 
-                student_data[student]["courses"].append(course)
-
-            for student in sorted(student_data.keys(), key=lambda s: s.split()[-1]):
-
-                courses = sorted(set(student_data[student]["courses"]))
-                notes = student_data[student]["notes"]
+                courses = sorted(set(student_courses[student]))
 
                 with st.expander(student):
-
                     for c in courses:
                         st.write(f"- {c}")
 
-                    if notes and not pd.isna(notes):
-                        st.markdown("**Notes:**")
-                        st.write(notes)
-
-    else:
-        st.write("No data yet")
-
-# ======================
-# STUDENTS → COURSES
-# ======================
-
-st.subheader("Students and their courses")
-
-if "first_name" in df.columns and "last_name" in df.columns and "course" in df.columns:
-
-    student_data = {}
-
-    for _, row in df.iterrows():
-
-        first_name = row.get("first_name")
-        last_name = row.get("last_name")
-        course = row.get("course")
-        notes = row.get("notes")
-
-        if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
-            continue
-
-        student = f"{first_name} {last_name}"
-
-        if student not in student_data:
-            student_data[student] = {
-                "courses": [],
-                "notes": notes
-            }
-
-        student_data[student]["courses"].append(course)
-
-            # ORDINAMENTO PER COGNOME
-            for student in sorted(student_data.keys(), key=lambda s: s.split()[-1]):
-        
-                courses = sorted(set(student_data[student]["courses"]))
-                notes = student_data[student]["notes"]
-        
-                with st.expander(student):
-        
-                    for c in courses:
-                        st.write(f"- {c}")
-        
-                    if notes and not pd.isna(notes):
-                        st.markdown("**Notes:**")
-                        st.write(notes)
-                       
-
         # ======================
-        # COURSE COUNTS
+        # EXPORT PER COURSE
         # ======================
-        st.subheader("Students per course")
-
-        course_counts = {}
-
-        for course in df["course"]:
-            if pd.isna(course):
-                continue
-
-            course_counts[course] = course_counts.get(course, 0) + 1
-
-        for course, count in sorted(course_counts.items()):
-            st.write(f"- {course}: {count}")
-
-        # ======================
-        # EXPORT STRUCTURED PLANS
-        # ======================
-        
-        st.subheader("Export structured plans")
-        
-        import io
-        from collections import defaultdict
-        
-        student_data = defaultdict(list)
-        
-        for _, row in df.iterrows():
-        
-            first_name = row.get("first_name")
-            last_name = row.get("last_name")
-            email = row.get("email")
-            cycle = row.get("cycle")
-            course = row.get("course")
-        
-            if pd.isna(first_name) or pd.isna(last_name) or pd.isna(course):
-                continue
-        
-            
-            student_key = (last_name, first_name)
-        
-            student_data[student_key].append({
-                "first_name": first_name,
-                "last_name": last_name,
-                "email": email,
-                "cycle": cycle,
-                "course": course
-            })
-        
-        buffer = io.BytesIO()
-        
-        with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-        
-            # ordinamento per cognome
-            for (last_name, first_name) in sorted(student_data.keys()):
-        
-                records = student_data[(last_name, first_name)]
-        
-                email = records[0]["email"]
-                cycle = records[0]["cycle"]
-        
-                courses = sorted(set(r["course"] for r in records))
-        
-                rows = []
-        
-                # intestazione
-                rows.append(["Last name", last_name, "", ""])
-                rows.append(["First name", first_name, "", ""])
-                rows.append(["Cycle", cycle, "", ""])
-                rows.append(["Email", email, "", ""])
-                rows.append(["", "", "", ""])
-        
-                # lista corsi
-                rows.append(["Courses", "", "", ""])
-        
-                for c in courses:
-                    rows.append(["", c, "", ""])
-        
-                df_student = pd.DataFrame(rows)
-        
-                sheet_name = f"{last_name}_{first_name}"[:31]
-        
-                df_student.to_excel(
-                    writer,
-                    sheet_name=sheet_name,
-                    index=False,
-                    header=False
-                )
-        
-        st.download_button(
-            label="Download structured plans",
-            data=buffer.getvalue(),
-            file_name="students_structured.xlsx",
-            mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-        )
-
-
-
-# ======================
-# EXPORT PER COURSE 
-# ======================
-
         st.subheader("Export students per course")
-        
+
         import io
-        
-        required_cols = {"first_name", "last_name", "email", "cycle", "course"}
-        
-        if required_cols.issubset(df.columns):
-        
+
+        if "course" in df.columns and "name" in df.columns and "email" in df.columns:
+
             courses_list = sorted(df["course"].dropna().unique())
-        
+
             for course in courses_list:
-        
-                df_course = df[df["course"] == course]
-        
-                # rimuove duplicati studenti nello stesso corso
-                df_course = df_course.drop_duplicates(
-                    subset=["first_name", "last_name", "email"]
-                )
-        
-                # seleziona e rinomina colonne
-                df_export = df_course[[
-                    "last_name",
-                    "first_name",
-                    "cycle",
-                    "email"
-                ]].rename(columns={
-                    "last_name": "Cognome",
-                    "first_name": "Nome",
-                    "cycle": "Ciclo",
-                    "email": "Email"
-                })
-        
+
+                df_course = df[df["course"] == course][["name", "email"]]
+                df_course = df_course.drop_duplicates()
+
                 buffer = io.BytesIO()
-        
-                with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
-                    df_export.to_excel(writer, index=False, sheet_name="Students")
-        
+                df_course.to_excel(buffer, index=False)
+
                 file_name = course.replace(" ", "_").replace(",", "") + ".xlsx"
-        
+
                 st.download_button(
                     label=f"Download: {course}",
                     data=buffer.getvalue(),
                     file_name=file_name,
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                )
+                )        
+        # ======================
+        # COURSE COUNTS
+        # ======================
+        st.subheader("Students per course")
+
+        if "course" in df.columns:
+
+            course_counts = {}
+
+            for course in df["course"]:
+                if pd.isna(course):
+                    continue
+
+                course_counts[course] = course_counts.get(course, 0) + 1
+
+            for course, count in sorted(course_counts.items()):
+                st.write(f"- {course}: {count}")
+
+        # ======================
+        # PIANI DI STUD
+        # ======================
+
+        st.subheader("📥 Export: structured plans (clean layout)")
+
+        import io
+        from collections import defaultdict
+        
+        if "name" in df.columns and "course" in df.columns and "email" in df.columns and "cycle" in df.columns:
+        
+            student_data = defaultdict(list)
+        
+            for _, row in df.iterrows():
+        
+                name = row.get("name")
+                email = row.get("email")
+                cycle = row.get("cycle")
+                course = row.get("course")
+        
+                if pd.isna(name) or pd.isna(course):
+                    continue
+        
+                student_data[name].append({
+                    "email": email,
+                    "cycle": cycle,
+                    "course": course
+                })
+        
+            buffer = io.BytesIO()
+        
+            with pd.ExcelWriter(buffer, engine="openpyxl") as writer:
+        
+                for student, records in student_data.items():
+        
+                    email = records[0]["email"]
+                    cycle = records[0]["cycle"]
+        
+                    courses = sorted(set(r["course"] for r in records))
+        
+                    # costruzione righe manuale
+                    rows = []
+        
+                    # intestazione (una sola volta)
+                    rows.append(["Name", student, "", ""])
+                    rows.append(["Cycle", cycle, "", ""])
+                    rows.append(["Email", email, "", ""])
+                    rows.append(["", "", "", ""])  # riga vuota
+        
+                    # header tabella corsi
+                    rows.append(["Courses", "", "", ""])
+        
+                    # elenco corsi
+                    for c in courses:
+                        rows.append(["", c, "", ""])
+        
+                    df_student = pd.DataFrame(rows)
+        
+                    sheet_name = student[:31]
+        
+                    df_student.to_excel(writer, sheet_name=sheet_name, index=False, header=False)
+        
+            st.download_button(
+                label="Download structured plans (Excel)",
+                data=buffer.getvalue(),
+                file_name="students_structured.xlsx",
+                mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            )
