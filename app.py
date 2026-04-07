@@ -261,27 +261,13 @@ for _, row in df.iterrows():
 
     student = f"{first_name} {last_name}"
 
-    if student not in student_data:
-        student_data[student] = {
-            "courses": [],
-            "notes": notes
-        }
+    for student in sorted(student_courses):
 
-    student_data[student]["courses"].append(course)
+    courses = sorted(set(student_courses[student]))
 
-    for student in sorted(student_data):
-    
-        courses = sorted(set(student_data[student]["courses"]))
-        notes = student_data[student]["notes"]
-    
-        with st.expander(student):
-    
-            for c in courses:
-                st.write(f"- {c}")
-    
-            if notes and not pd.isna(notes):
-                st.markdown("**Notes:**")
-                st.write(notes)
+    with st.expander(student):
+        for c in courses:
+            st.write(f"- {c}")
 
         # ======================
         # COURSE COUNTS
